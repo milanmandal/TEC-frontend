@@ -1,0 +1,25 @@
+body{
+  background: #282c34;
+}
+
+body::-webkit-scrollbar{
+  width: 10px;
+  background-color: transparent;
+}
+
+body::-webkit-scrollbar-thumb{
+  background-color: rgba(0,0,0,0.7);
+  border-radius: 20px;
+}
+
+.timer{
+  position: absolute;
+  right: 5%;
+  color: white;
+  font-size: 24px;
+  z-index: 2;
+}
+
+#root{
+  position: relative;
+}

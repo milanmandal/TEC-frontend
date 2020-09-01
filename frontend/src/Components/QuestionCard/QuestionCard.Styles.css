@@ -1,0 +1,73 @@
+.mcq{
+    position: relative;
+    padding: 20px;
+    z-index: 1;
+}
+
+.mcq-container .mcq h2{
+    position: absolute;
+    top: -40px;
+    right: 20px;
+    margin: 0;
+    padding: 0;
+    font-size: 10em;
+    opacity: 0.2;
+    transition: 0.5s;
+}
+
+.hover:hover h2{
+    top: -80px;
+    opacity: 0.4;
+}
+
+.mcq-container .mcq h3{
+    margin: 0 0 10px;
+    padding: 0;
+    font-size: 20px;
+    font-weight: 500;
+    color: #fff;
+}
+
+.mcq-container .mcq .options{
+    margin: 20px 0;
+    padding: 0 10px;
+    color: #fff;
+    font-size: 12px;
+}
+
+.mcq-container .mcq label{
+    padding-left: 10px;
+}
+
+
+.mcqs-container button{
+    position: relative;
+    transition: all 0.5s cubic-bezier(0.445, 0.05, 0, 1);
+    border: 1px solid #fff;
+    background: transparent;
+    color: white;
+    margin: 20px 0 0;
+    outline: none;
+    font-size: 20px;
+    box-shadow: -2px -2px 6px rgba(255,255,255,0.1),
+                2px 2px 6px rgba(0,0,0,0.8);
+    padding: 10px 20px;
+    transform: translateY(-40px);
+    opacity: 0;
+    visibility: hidden;
+}
+
+.hover:hover button{
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+.mcqs-container button:hover{
+    background: white;
+    color: black;
+}
+
+.options{
+    font-size: 20px;
+}

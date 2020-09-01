@@ -1,0 +1,61 @@
+.mcqs-container{
+    margin: 0 50px;
+    justify-content: center;
+    align-items: center; 
+    box-shadow: -5px -5px 10px rgba(255,255,255,0.05),
+                5px 5px 15px rgba(0,0,0,0.5);
+    border-radius: 5px;
+    background: #282c34;
+}
+
+.mcq-questions{
+    padding: 20px;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+    grid-gap: 40px 40px;
+    grid-template-rows: auto;
+}
+
+.mcq-questions .mcq-container{
+    position: relative;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #282c34;
+    border: 1px solid #242830;
+}
+
+.mcq-questions .hover:before{
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(180deg, #2ba15f,#f8d229);
+    z-index: -1;
+    transition: 0.5s;
+    transform: skew(2deg, 2deg);
+}
+
+.hover:hover::before{
+    transform: skew(0,0);
+}
+
+.hover:hover{
+    transition: 0.5s;
+    transform: scale(1.05);
+}
+
+.mcq-questions .hover:after{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background-color: #1c1f24;
+    pointer-events: none;
+}

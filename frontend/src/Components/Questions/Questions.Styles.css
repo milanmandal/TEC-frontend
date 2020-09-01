@@ -1,0 +1,38 @@
+.questions-page{
+    width: 80%;
+    padding: 0 10%;
+    display: flex;
+    flex-direction: column;
+    transform: scale(0.95);
+    transition: all 0.5s cubic-bezier(0.445, 0.05, 0, 1);
+}
+
+.questions-page:hover{
+    transform: scale(1);
+}
+
+.questions-page .button button{
+    width: 20%;
+    height: 40px;
+    margin: 20px 40%;
+    transition: all 0.5s cubic-bezier(0.445, 0.05, 0, 1);
+    border: 1px solid white;
+    outline: none;
+    border-radius: 2px;
+    font-size: 20px;
+    margin-top: 20px;
+    background-color: #282c34;
+}
+
+.questions-page .button button:hover{
+    background-color: white;
+}
+
+.questions-page .button button{
+    text-decoration: none;
+    color: white;
+}
+
+.questions-page .button button:hover{
+    color: black;
+}

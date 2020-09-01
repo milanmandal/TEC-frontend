@@ -1,0 +1,77 @@
+.round-one-score-page{
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    color: white;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.round-one-score{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.round-one-score .round-text{
+    font-size: 24px;
+    letter-spacing: 1px;
+}
+
+.round-one-score .score-text{
+    font-size: 36px;
+    letter-spacing: 3px;
+}
+
+.round-one-score .score{
+    color: #f8d229;
+    font-size: 45px;
+    letter-spacing: 5px;
+}
+
+.round-one-score button{
+    font-size: 20px;
+    padding: 5px 20px;
+    border-radius: 2px;
+    border: none;
+    outline: none;
+    transition: all 0.5s cubic-bezier(0.445, 0.05, 0, 1);
+}
+
+.round-one-score button:hover{
+    background: #2ba15f;
+    color: white;
+}
+
+.round-one-score button:active {
+    transform: scale(0.95);
+    transition: all 0.2s;
+}
+
+.square{
+    position: absolute;
+    background: #2ba15f;
+    pointer-events: none;
+    z-index: 0;
+    animation: popUp 5s linear infinite;
+}
+
+@keyframes popUp{
+    0%{
+        transform: scale(0) translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+    10%{
+        opacity: 1;
+    }
+    90%{
+        opacity: 1;
+    }
+    100%{
+        transform: scale(1) translateY(-500%) rotate(360deg);
+        opacity: 0;
+    }
+}

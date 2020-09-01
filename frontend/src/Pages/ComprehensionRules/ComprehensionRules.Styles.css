@@ -1,0 +1,54 @@
+.comprehension-rules-container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.comprehension-rules-container .comprehesion-rules{
+    background: #282c34;
+    width: 85%;
+    border-radius: 10px;
+    transition: all 1s cubic-bezier(0.445, 0.05, 0, 1);
+    color: #fff;
+    transform: scale(0.95);
+}
+
+.comprehension-rules-container .comprehesion-rules h1{
+    margin: auto;
+    margin-top: 30px;
+}
+
+.comprehension-rules-container:hover .comprehesion-rules{
+    transform: scale(1);
+}
+
+.comprehension-rules-container .comprehesion-rules .rules{
+    width: 80%;
+    height: fit-content;
+    padding: 10px 10%;
+    margin: 0;
+    font-size: 20px;
+}
+
+.comprehension-rules-container .comprehesion-rules a{
+    color: black;
+    text-decoration: none;
+}
+
+.comprehesion-rules .button button{
+    width: 20%;
+    margin: 20px 40%;
+    height: 40px;
+    transition: all 0.5s cubic-bezier(0.445, 0.05, 0, 1);
+    border: none;
+    outline: none;
+    border-radius: 2px;
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+.comprehesion-rules .button button:hover{
+    background: #f8d229;
+}
