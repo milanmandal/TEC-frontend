@@ -55,7 +55,7 @@
     position: absolute;
     background: #2ba15f;
     pointer-events: none;
-    z-index: 0;
+    z-index: -1;
     animation: popUp 5s linear infinite;
 }
 

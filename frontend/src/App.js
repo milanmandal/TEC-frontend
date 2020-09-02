@@ -29,6 +29,7 @@ import RndCrisis1 from './Pages/RndCrisis1/RndCrisis1';
 import RndCrisis2 from './Pages/RndCrisis2/RndCrisis2';
 import SalesCrisis1 from './Pages/SalesCrisis1/SalesCrisis1';
 import SalesCrisis2 from './Pages/SalesCrisis2/SalesCrisis2';
+import RoundThreeScore from './Pages/Round3Score/RoundThreeScore';
 
 class App extends Component{ 
   constructor(){
@@ -75,6 +76,7 @@ class App extends Component{
       <Route exact path='/crisis/sales/1' component={SalesCrisis1} />
       <Route exact path='/crisis/sales/2' component={SalesCrisis2} />
       <Route exact path='/round3/rules/:id' component={Round3Rules} />
+      <Route exact path='/round3/score' component={RoundThreeScore} />
     </Switch>
     </Provider>
     </div>

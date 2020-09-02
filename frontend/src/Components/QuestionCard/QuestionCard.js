@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import './QuestionCard.Styles.css';
 import { updateScore } from '../../Redux/User/UserActions';
 import Axios from 'axios';
-var value = 0;
+
 const QuestionCard = ({questionDetails, index, currentUser, updateScore}) => {
     const { _id, question, answer } = questionDetails;
 
@@ -24,23 +24,18 @@ const QuestionCard = ({questionDetails, index, currentUser, updateScore}) => {
         e.preventDefault();
         const respons = response[response.length-1];
         respons.value === answer ? result.push(true)  : result.push(false)
-        console.log(result[result.length-1])
-        console.log(document.getElementById(question))
         if(result[result.length-1] === true) {
              updateScore(currentUser.score)
              
-             console.log(currentUser.score)
-             console.log(currentUser.currentUser)
              const points = {
                  email:currentUser.currentUser.email,
                  password:currentUser.currentUser.password,
                  company:currentUser.currentUser.company,
-                 score: currentUser.score,
+                 score: currentUser.score + 1000,
                  token:currentUser.currentUser.token,
              }
              var id = currentUser.currentUser._id;
              Axios.post('http://localhost:5000/user/score/'+id, points)
-             .then(res => console.log(res.data));
         }
         var div = document.getElementById(respons.name)
         var form = document.getElementById(respons.name+'form')
