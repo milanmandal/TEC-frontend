@@ -1,6 +1,7 @@
 const INITIAL_STATE = {
     currentUser: null,
-    score: 0
+    score: 0,
+    investedCompanies: []
 }
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -19,6 +20,11 @@ const userReducer = (state = INITIAL_STATE, action) => {
             return{
                 ...state,
                 score: action.payload.currentScore + parseInt(action.payload.addScore)
+            }
+        case 'UPDATE_INVESTED_COMPANIES':
+            return{
+                ...state,
+                investedCompanies: action.payload
             }
         default:
             return state;

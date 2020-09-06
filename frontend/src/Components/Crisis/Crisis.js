@@ -29,7 +29,6 @@ const Crisis = ({heading, crisis, question, options, redirect, currentUser, upda
           console.log(error);
         })
     })
-    console.log(score)
     const onsubmit = (e) => {
         e.preventDefault();
         document.getElementById('redirect').click()
@@ -53,13 +52,13 @@ const Crisis = ({heading, crisis, question, options, redirect, currentUser, upda
     function rankToScore(rank){
         switch(rank){
             case 1:
-                return 4000;
+                return 10000;
             case 2:
-                return 3000;
+                return 6000;
             case 3:
-                return 2000;
+                return 4000;
             case 4:
-                return 1000;
+                return 0;
             default:
                 return 0;
         }

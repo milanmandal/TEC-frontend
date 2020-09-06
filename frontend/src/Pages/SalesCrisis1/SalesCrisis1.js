@@ -14,7 +14,12 @@ class SalesCrisis1 extends Component {
     }
 
     componentDidMount(){
-        Axios.get('http://localhost:5000/' + this.props.currentUser.currentUser.company + '/getcrisissales')
+        Axios.get('http://localhost:5000/' + this.props.currentUser.currentUser.company + '/getcrisissales',
+        {
+          headers:{
+            "authorization":"Bearer "+sessionStorage.usertoken
+          }
+        })
         .then(res => this.setState({
             crisis: res.data[0].passage,
             question: res.data[0].question,

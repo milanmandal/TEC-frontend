@@ -13,7 +13,12 @@ export default class SalesComprehension extends Component {
     }
 
     componentDidMount(){
-        Axios.get('http://localhost:5000/company/info')
+        Axios.get('http://localhost:5000/company/info',
+        {
+          headers:{
+            "authorization":"Bearer "+sessionStorage.usertoken
+          }
+        })
         .then(res => res.data.map( company => company.name === this.props.match.params.companyName ?
                 this.setState({salesComprehension: company.sales})
                 : console.log()

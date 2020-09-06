@@ -8,7 +8,11 @@ class RoundOneScore extends Component{
         if(sessionStorage.usertoken){
             return (
                 <React.Fragment>
-                    <ScoreCard redirect={'/round3/rules/'+this.props.currentUser.currentUser._id} score={this.props.currentUser.score} round="1" />
+                    <ScoreCard
+                        redirect={'/round2/rules/'+this.props.currentUser.currentUser._id}
+                        score={this.props.currentUser.score}
+                        round="Round-1"
+                        nextRound="Round-2" />
                 </React.Fragment>
             )
         }

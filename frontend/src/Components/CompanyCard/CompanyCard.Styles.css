@@ -1,0 +1,52 @@
+.company-card{
+    cursor: pointer;
+    position: relative;
+    transition: all 0.5s cubic-bezier(0.445, 0.05, 0, 1);
+}
+
+.company-card:after{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #1c1f24;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.company-card:before{
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    background: linear-gradient(180deg, #2ba15f,#f8d229);
+    z-index: -2;
+    transition: 0.5s;
+    transform: skew(2deg, 2deg);
+}
+
+.company-card:hover::before{
+    transform: skew(0,0);
+    opacity: 1;
+}
+
+.company-card:hover{
+    transform: scale(1.05);
+}
+
+.company-card .heading{
+    font-size: 44px;
+    letter-spacing: 5px;
+    margin: 20px;
+}
+
+.company-card h3{
+    font-size: 20px;
+    letter-spacing: 3px;
+    margin-left: 20px;
+}
+

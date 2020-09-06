@@ -3,16 +3,16 @@ import { connect } from 'react-redux';
 
 import ScoreCard from '../../Components/ScoreCard/ScoreCard';
 
-class RoundThreeScore extends Component{
+class RoundTwoScore extends Component{
     render(){
         if(sessionStorage.usertoken){
             return (
                 <React.Fragment>
                     <ScoreCard
-                        redirect={'/whatnext/'+this.props.currentUser.currentUser._id}
+                        redirect={'/round3/rules/'+this.props.currentUser.currentUser._id}
                         score={this.props.currentUser.score}
-                        round="Round-3"
-                        nextRound="LeaderBoard" />
+                        round="Round-2"
+                        nextRound="Round-3" />
                 </React.Fragment>
             )
         }
@@ -27,4 +27,4 @@ const mapStateToProps = (state) => ({
     currentUser: state.user
 })
 
-export default connect(mapStateToProps)(RoundThreeScore);
+export default connect(mapStateToProps)(RoundTwoScore);

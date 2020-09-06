@@ -13,7 +13,12 @@ export default class FinanceComprehension extends Component {
     }
 
     componentDidMount(){
-        Axios.get('http://localhost:5000/company/info')
+        Axios.get('http://localhost:5000/company/info',
+        {
+          headers:{
+            "authorization":"Bearer "+sessionStorage.usertoken
+          }
+        })
         .then(res => res.data.map( company => company.name === this.props.match.params.companyName ?
                 this.setState({financeComprehension: company.finance})
                 : console.log()

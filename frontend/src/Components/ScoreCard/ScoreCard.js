@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import './ScoreCard.Styles.css'
 
 
-const ScoreCard = ({redirect, score, round}) => {
-    onclick = () => {
+const ScoreCard = ({redirect, score, round, nextRound}) => {
+    const onclick = () => {
         window.location = redirect
     }
 
@@ -48,10 +48,10 @@ const ScoreCard = ({redirect, score, round}) => {
     return (
         <div className='round-one-score-page' id='round_score'>
             <div className='round-one-score'>
-                <p className='round-text'>Round-{round} Completed!!</p>
+                <p className='round-text'>{round} Completed!!</p>
                 <p className='score-text'>Your score is</p>
                 <p className='score'>Rs. {score}</p>
-                <button onClick={onclick}>Round-2</button>
+                <button onClick={onclick}>{nextRound}</button>
             </div>
         </div>
     )

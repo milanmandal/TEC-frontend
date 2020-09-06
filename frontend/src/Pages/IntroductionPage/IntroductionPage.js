@@ -11,8 +11,17 @@ import Header from '../../Components/Header/Header';
 import Body from '../../Components/Body/Body';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import ComprehensionRules from '../ComprehensionRules/ComprehensionRules';
 import Axios from 'axios';
+
+
+const mapDispatchToProps = dispatch => ({
+  setCurrentUser: user => dispatch(setCurrentUser(user))
+});
+
+const mapStateToProps = (state) => ({
+  setCurrentUser: state.user.currentUser
+})
 
 class IntroductionPage extends Component {
     constructor(){
@@ -21,6 +30,7 @@ class IntroductionPage extends Component {
             
             CompanyName:'',
             info:'',
+            page:1,
            
         }
     }
@@ -32,7 +42,13 @@ class IntroductionPage extends Component {
           if (response.status === 200) {
             this.setState({
               CompanyName: response.data.company,
+              
             })
+            if(response.data.page==2)
+            {
+              return <ComprehensionRules/>
+             
+            }
             this.props.setCurrentUser(response.data)
             toast.success('You are alloted with the company '+response.data.company.toUpperCase())
           }
@@ -42,11 +58,18 @@ class IntroductionPage extends Component {
         })
 
 
-        Axios.get('http://localhost:5000/company/info')
+        Axios.get('http://localhost:5000/company/info',
+        {
+          headers:{
+            "authorization":"Bearer "+sessionStorage.usertoken
+          }
+        }
+        )
         .then(res => res.data.map( company => company.name.toUpperCase() === this.state.CompanyName.toUpperCase() ?
                 this.setState({info: company.info})
                 : console.log()
             ))
+        
     }
     
     render(){
@@ -77,12 +100,6 @@ class IntroductionPage extends Component {
     
 }
 
-const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user))
-});
 
-const mapStateToProps = (state) => ({
-  setCurrentUser: state.user.currentUser
-})
 
 export default connect(mapStateToProps , mapDispatchToProps)(IntroductionPage);

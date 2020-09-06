@@ -11,7 +11,12 @@ export default class RnDQuestions extends Component {
     }
 
     componentDidMount(){
-        Axios.get('http://localhost:5000/'+this.props.match.params.companyName+'/getresdev')
+        Axios.get('http://localhost:5000/'+this.props.match.params.companyName+'/getresdev',
+        {
+          headers:{
+            "authorization":"Bearer "+sessionStorage.usertoken
+          }
+        })
         .then(res => this.setState({rndQuestions: res.data}))
     }
 

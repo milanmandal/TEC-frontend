@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react';
 import{ Switch, Route } from 'react-router-dom';
+import Modal from 'react-modal';
 
 import './App.css';
 
@@ -18,7 +19,7 @@ import SalesQuestions from './Pages/SalesQuestions/SalesQuestions';
 import Timer from './Components/Timer/Timer';
 import RoundOneScore from './Pages/Round1Score/RoundOneScore';
 import { Provider } from 'react-redux';
-
+import RoundTwoScore from './Pages/Round2Score/RoundTwoScore'
 import store from './Redux/Store';
 import Round3Rules from './Pages/Round3Rules/Round3Rules';
 import ProductionCrisis1 from './Pages/ProductionCrisis1/ProductionCrisis1';
@@ -30,6 +31,10 @@ import RndCrisis2 from './Pages/RndCrisis2/RndCrisis2';
 import SalesCrisis1 from './Pages/SalesCrisis1/SalesCrisis1';
 import SalesCrisis2 from './Pages/SalesCrisis2/SalesCrisis2';
 import RoundThreeScore from './Pages/Round3Score/RoundThreeScore';
+import Round2Rules from './Pages/Round2Rules.js/Round2Rules';
+import StockMarket from './Pages/Round2/Round2';
+
+Modal.setAppElement('#root')
 
 class App extends Component{ 
   constructor(){
@@ -67,6 +72,9 @@ class App extends Component{
       <Route exact path='/comprehension/:companyName/Sales' component={SalesComprehension} />
       <Route exact path='/comprehension/:companyName/SalesQuestions' component={SalesQuestions} />
       <Route exact path='/round1/score' component={RoundOneScore} />
+      <Route exact path='/round2/rules/:id' component={Round2Rules} />
+      <Route exact path='/round2/score' component={RoundTwoScore} />
+      <Route exact path='/stockmarket' component={StockMarket} />
       <Route exact path='/crisis/production/1' component={ProductionCrisis1} />
       <Route exact path='/crisis/production/2' component={ProductionCrisis2} />
       <Route exact path='/crisis/finance/1' component={FinanceCrisis1} />

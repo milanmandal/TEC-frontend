@@ -13,7 +13,12 @@ export default class FinanceQuestions extends Component {
     componentDidMount(){
         
         
-        Axios.get('http://localhost:5000/'+this.props.match.params.companyName+'/getfinance')
+        Axios.get('http://localhost:5000/'+this.props.match.params.companyName+'/getfinance',
+        {
+          headers:{
+            "authorization":"Bearer "+sessionStorage.usertoken
+          }
+        })
         .then(res => this.setState({financeQuestions: res.data}))
         
        

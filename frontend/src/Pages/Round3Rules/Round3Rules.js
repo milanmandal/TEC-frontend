@@ -9,7 +9,12 @@ import Axios from 'axios';
 class Round3Rules extends Component {
 
     componentDidMount(){
-        Axios.get('http://localhost:5000/user/'+this.props.match.params.id)
+        Axios.get('http://localhost:5000/user/'+this.props.match.params.id,
+        {
+          headers:{
+            "authorization":"Bearer "+sessionStorage.usertoken
+          }
+        })
         .then(response => {
           if (response.status === 200) {
             this.props.setCurrentUser(response.data)

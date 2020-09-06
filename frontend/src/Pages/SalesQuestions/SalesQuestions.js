@@ -11,7 +11,12 @@ export default class SalesQuestions extends Component {
     }
 
     componentDidMount(){
-        Axios.get('http://localhost:5000/'+this.props.match.params.companyName+'/getsales')
+        Axios.get('http://localhost:5000/'+this.props.match.params.companyName+'/getsales',
+        {
+          headers:{
+            "authorization":"Bearer "+sessionStorage.usertoken
+          }
+        })
         .then(res => this.setState({salesQuestions: res.data}))
     }
 

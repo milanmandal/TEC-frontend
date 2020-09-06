@@ -1,11 +1,17 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import { Link } from 'react-router-dom';
+
 
 import './ComprehensionRules.Styles.css';
 import Header from '../../Components/Header/Header';
+import Axios from 'axios';
 
 const ComprehensionRules = ({match}) => {
+    
     const allotedCompanyName = match.params.companyName;
+   
+
+    
     if(sessionStorage.usertoken)
     {
     return(

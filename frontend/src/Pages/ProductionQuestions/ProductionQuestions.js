@@ -15,7 +15,12 @@ export default class ProductionQuestions extends Component {
 
     componentDidMount(){
         toast.warn("You are NOT allowed to CHANGE the answer after submitting")
-        Axios.get('http://localhost:5000/'+this.props.match.params.companyName+'/getproduction')
+        Axios.get('http://localhost:5000/'+this.props.match.params.companyName+'/getproduction',
+        {
+          headers:{
+            "authorization":"Bearer "+sessionStorage.usertoken
+          }
+        })
         .then(res => this.setState({productionQuestions: res.data}))
     }
 

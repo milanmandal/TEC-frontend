@@ -1,0 +1,197 @@
+.round2-page .page-heading{
+    color: white;
+    letter-spacing: 10px;
+    font-size: 44px;
+    width: 90%;
+    margin: 30px auto;
+    border-bottom: 1px solid white;
+}
+
+.stockmarket{
+    color: white;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.stockmarket .company-cards-container{
+    width: 75%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.stockmarket .company-cards-container .company-card{
+    width: 25%;
+    margin: 30px 1%;
+    height: 300px;
+}
+
+.stockmarket .my-portfolio{
+    width: 20%;
+}
+
+.stockmarket .my-portfolio .heading{
+    background: #1c1f24;
+    border: 1px solid white;
+    border-bottom: none;
+    padding: 20px;
+    letter-spacing: 5px;
+}
+
+.stockmarket .my-portfolio .capital{
+    background: #1c1f24;
+    border: 1px solid white;
+    border-bottom: none;
+    border-top: none;
+    margin: 0;
+    padding: 20px;
+    letter-spacing: 3px;
+    color: #f8d229;
+}
+
+.stockmarket .my-portfolio .investment-details{
+    border: 1px solid white;
+    border-top: none;
+}
+
+.stockmarket .my-portfolio .investment-details p{
+    margin: 0;
+    padding: 20px;
+    padding-bottom: 10px;
+    font-size: 20px;
+    letter-spacing: 2px;
+}
+
+.stockmarket a{
+    width: 10%;
+    margin: auto;
+}
+
+.stockmarket a button{
+    width: 100%;
+    height: 40px;
+    transition: all 0.5s cubic-bezier(0.445, 0.05, 0, 1);
+    border: none;
+    outline: none;
+    border-radius: 2px;
+    font-size: 20px;
+    margin: 20px 0;
+}
+
+.stockmarket a button:hover{
+    background: #f8d229;
+}
+
+.ReactModal__Overlay{
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    height: 100vh;
+}
+
+.ReactModal__Content{
+    background: #1c1f24 !important;
+    width: 80%;
+    height: 80%;
+    margin: auto;
+    border: none !important;
+    padding: 0 !important;
+    color: white;
+}
+
+.ReactModal__Content .popup{
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.ReactModal__Content .popup .popup-details{
+    width: 20%;
+    height: 100%;
+    background: #282c34;
+    padding-left: 20px;
+    color: #f8d229;
+}
+
+.ReactModal__Content .popup .popup-details .heading-primary{
+    font-size: 44px;
+    margin: 20px 0;
+    color: #2ba15f;
+    letter-spacing: 5px;
+}
+
+.ReactModal__Content .popup .popup-details table{
+    margin: 50px 0;
+    font-size: 24px;
+}
+
+.ReactModal__Content .popup .popup-details p{
+    font-size: 20px;
+    margin-bottom: 50px;
+}
+
+.ReactModal__Content .popup .popup-details input{
+    width: 80%;
+    margin: 0 5%;
+    font-size: 24px;
+    background: #1c1f24;
+    outline: none;
+    border: none;
+    padding: 5px;
+    color: white;
+}
+
+.ReactModal__Content .popup .popup-details button{
+    height: 40px;
+    margin: 20px;
+    transition: all 0.5s cubic-bezier(0.445, 0.05, 0, 1);
+    border: none;
+    outline: none;
+    border-radius: 2px;
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+.ReactModal__Content .popup .popup-details button:hover{
+    background: #2ba15f;
+    color: white;
+}
+
+.ReactModal__Content .popup .popup-contents .heading-secondary{
+    font-size: 36px;
+    margin: 20px;
+    color: #f8d229;
+    letter-spacing: 2px;
+}
+
+.ReactModal__Content .popup .popup-contents .news{
+    width: 85%;
+    margin: auto;
+    font-size: 20px;
+    letter-spacing: 1px;
+    padding-bottom: 20px;
+}
+
+.ReactModal__Content .popup .popup-contents{
+    width: 80%;
+    overflow-y: scroll;
+}
+
+.ReactModal__Content .popup .popup-contents::-webkit-scrollbar{
+    width: 10px;
+    background-color: transparent;
+  }
+ 
+  ::-webkit-scrollbar-thumb{
+    background-color: rgba(0,0,0,0.9);
+    border-radius: 15px;
+  }
+
+.ReactModal__Content .popup .popup-contents .graph canvas{
+    width: 70% !important;
+    margin: auto;
+    height: 70% !important;
+    margin-top: 10px;
+}
+h1{
+    margin: 0;
+}
