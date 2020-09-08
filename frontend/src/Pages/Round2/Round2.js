@@ -7,7 +7,7 @@ import './Round2.Styles.css'
 import Axios from 'axios';
 import Graph from '../../Components/Graph/Graph';
 import { connect } from 'react-redux';
-import { updateInvestedCompanies } from '../../Redux/User/UserActions';
+import { updateInvestedCompanies, updateInvestmentScore } from '../../Redux/User/UserActions';
 
 class StockMarket extends Component {
     constructor(){
@@ -66,8 +66,9 @@ class StockMarket extends Component {
                         existingCompany.investedAmount = existingCompany.investedAmount + investedAmount
                         existingCompany.returns = (selectedCompany.profitpercent+100)*existingCompany.investedAmount/100
                     }else{
-                        investedCompanies.push({name: selectedCompany.name, investedAmount: investedAmount, returns: (selectedCompany.profitpercent+100)*investedAmount/100})
+                        investedCompanies.push({name: selectedCompany.name, investedAmount: investedAmount, returns: (selectedCompany.profitpercent+100)*investedAmount/100, data: selectedCompany.data})
                     }
+                    this.props.updateInvestmentScore(this.score())
                     this.props.updateInvestedCompanies(investedCompanies)
                 }else{
                     alert('Cannot invest in more than 2 stocks')
@@ -82,77 +83,79 @@ class StockMarket extends Component {
 
     score = () => {
         const {investedCompanies} = this.state
-        return(investedCompanies.reduce((a,b) => a + b.returns, 0).toFixed(2))
+        const returns = investedCompanies.reduce((a,b) => a + b.returns, 0).toFixed(2)
+        return(parseFloat(returns)+parseFloat(this.state.capital.toFixed(2))-parseFloat(this.state.investedAmount.toFixed(2)))
     }
 
     render() {
-        console.log(this.score())
-        return (
-            this.state.companies ?
-            <div className='round2-page'>
-                <h1 className='page-heading'>STOCK MARKET</h1>
-                <div className='stockmarket'>
-                    <div className='company-cards-container'>
-                    {
-                        this.state.companies.map( (company,index) => <CompanyCard index={index} company={company} onclick={this.onclick} key={company.name} />)
-                    }
-                    </div>
-                    <div className='my-portfolio'>
-                        <h1 className='heading'>My Portfolio</h1>
-                        <h3 className='capital'>Capital: {this.state.capital.toFixed(2)}</h3>
-                        <div className='investment-details'>
+        if(sessionStorage.usertoken){
+            return (
+                this.state.companies ?
+                <div className='round2-page'>
+                    <h1 className='page-heading'>STOCK MARKET</h1>
+                    <div className='stockmarket'>
+                        <div className='company-cards-container'>
                         {
-                            this.state.investedCompanies.map((investedCompany, index) => 
-                                <p key={index}>You have invested <strong>Rs. {investedCompany.investedAmount.toFixed(2)}</strong> in <strong>{investedCompany.name}</strong></p>
-                            )
+                            this.state.companies.map( (company,index) => <CompanyCard index={index} company={company} onclick={this.onclick} key={company.name} />)
                         }
                         </div>
-                    </div>
-                    <Link to='/round2/score'><button>Score</button></Link>
-                    <Modal isOpen={this.state.isPopUpOpen} onRequestClose={() => this.setState({isPopUpOpen: false})}>
-                    {
-                        this.state.selectedCompany ? 
-                        <div className='popup'>
-                            <div className='popup-details'>
-                                <h1 className='heading-primary'>{this.state.selectedCompany.name.toUpperCase()}</h1>
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td>Price:</td>
-                                            <td>Rs. {this.state.selectedCompany.data[this.state.selectedCompany.data.length-1].price}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Last Updated:</td>
-                                            <td>{this.state.selectedCompany.data[this.state.selectedCompany.data.length-1].date}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <p>Minimum <strong>{this.state.selectedCompany.min}</strong> shares should be purchased</p>
-                                <form onSubmit={this.onInvest}>
-                                    <input
-                                        type='number'
-                                        placeholder='No. of Shares'
-                                        onChange={this.onInvestAmtChanged}
-                                    />
-                                    <button type='submit'>Invest</button>
-                                </form>
-                            </div>
-                            <div className='popup-contents'>
-                                <h1 className='heading-secondary'>Graph</h1>
-                                <Graph stockData={this.state.selectedCompany.data} />
-                                <h1 className='heading-secondary'>News</h1>
-                                <p className='news'>{this.state.selectedCompany.newsone}</p>
-                                <p className='news'>{this.state.selectedCompany.newstwo}</p>
-                                <p className='news'>{this.state.selectedCompany.newsthree}</p>
+                        <div className='my-portfolio'>
+                            <h1 className='heading'>My Portfolio</h1>
+                            <h3 className='capital'>Capital: {this.state.capital.toFixed(2)}</h3>
+                            <div className='investment-details'>
+                            {
+                                this.state.investedCompanies.map((investedCompany, index) => 
+                                    <p key={index}>You have invested <strong>Rs. {investedCompany.investedAmount.toFixed(2)}</strong> in <strong>{investedCompany.name}</strong></p>
+                                )
+                            }
                             </div>
                         </div>
-                        : <div className='loading'>Loading...</div>
-                    }
-                    </Modal>
+                        <Link to={'/round3/rules/'+this.props.currentUser.currentUser._id}><button>Round 3</button></Link>
+                        <Modal isOpen={this.state.isPopUpOpen} onRequestClose={() => this.setState({isPopUpOpen: false})}>
+                        {
+                            this.state.selectedCompany ? 
+                            <div className='popup'>
+                                <div className='popup-details'>
+                                    <h1 className='heading-primary'>{this.state.selectedCompany.name.toUpperCase()}</h1>
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td>Price:</td>
+                                                <td>Rs. {this.state.selectedCompany.data[this.state.selectedCompany.data.length-1].price}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Last Updated:</td>
+                                                <td>{this.state.selectedCompany.data[this.state.selectedCompany.data.length-1].date}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <p>Minimum <strong>{this.state.selectedCompany.min}</strong> shares should be purchased</p>
+                                    <form onSubmit={this.onInvest}>
+                                        <input
+                                            type='number'
+                                            placeholder='No. of Shares'
+                                            onChange={this.onInvestAmtChanged}
+                                        />
+                                        <button type='submit'>Invest</button>
+                                    </form>
+                                </div>
+                                <div className='popup-contents'>
+                                    <h1 className='heading-secondary'>Graph</h1>
+                                    <Graph stockData={this.state.selectedCompany.data.slice(0, 8)} />
+                                    <h1 className='heading-secondary'>News</h1>
+                                    <p className='news'>{this.state.selectedCompany.newsone}</p>
+                                    <p className='news'>{this.state.selectedCompany.newstwo}</p>
+                                    <p className='news'>{this.state.selectedCompany.newsthree}</p>
+                                </div>
+                            </div>
+                            : <div className='loading'>Loading...</div>
+                        }
+                        </Modal>
+                    </div>
                 </div>
-            </div>
-            : <div className='loading'>Loading...</div>
-        )
+                : <div className='loading'>Loading...</div>
+            )
+        }else{window.location='/';}
     }
 }
 
@@ -161,7 +164,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    updateInvestedCompanies: investedCompanies => dispatch(updateInvestedCompanies(investedCompanies))
+    updateInvestedCompanies: investedCompanies => dispatch(updateInvestedCompanies(investedCompanies)),
+    updateInvestmentScore: score => dispatch(updateInvestmentScore(score))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(StockMarket);

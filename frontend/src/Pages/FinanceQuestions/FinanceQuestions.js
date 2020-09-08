@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
 import Questions from '../../Components/Questions/Questions';
+import { connect } from 'react-redux';
 
-export default class FinanceQuestions extends Component {
+
+
+
+
+class FinanceQuestions extends Component {
     constructor(){
         super()
         this.state = {
@@ -11,6 +16,11 @@ export default class FinanceQuestions extends Component {
     }
 
     componentDidMount(){
+
+        const route = {
+            path:`/comprehension/${this.props.currentUser.currentUser.companyName}/FinanceQuestions`
+          }
+          Axios.post('http://localhost:5000/path/'+this.props.currentUser.currentUser.id,route)
         
         
         Axios.get('http://localhost:5000/'+this.props.match.params.companyName+'/getfinance',
@@ -39,3 +49,9 @@ export default class FinanceQuestions extends Component {
         else{window.location='/'}
     }
 }
+
+const mapStateToProps = (state) => ({
+    currentUser: state.user
+})
+
+export default connect(mapStateToProps)(FinanceQuestions);

@@ -23,26 +23,26 @@ const QuestionCard = ({questionDetails, index, currentUser, updateScore}) => {
     const onSubmitMcqs = (e) => {
         e.preventDefault();
         const respons = response[response.length-1];
-        respons.value === answer ? result.push(true)  : result.push(false)
-        if(result[result.length-1] === true) {
-             updateScore(currentUser.score)
-             
-             const points = {
-                 email:currentUser.currentUser.email,
-                 password:currentUser.currentUser.password,
-                 company:currentUser.currentUser.company,
-                 score: currentUser.score + 1000,
-                 token:currentUser.currentUser.token,
-             }
-             var id = currentUser.currentUser._id;
-             Axios.post('http://localhost:5000/user/score/'+id, points)
-        }
-        var div = document.getElementById(respons.name)
-        var form = document.getElementById(respons.name+'form')
-        var elements = form.elements
-        div.classList.remove('hover')
-        for(var i=0; i<elements.length;i++){
-            elements[i].disabled = true
+        if(respons){
+            respons.value === answer ? result.push(true)  : result.push(false)
+            if(result[result.length-1] === true) {
+                updateScore(currentUser.score)
+                
+                const points = {
+                    
+                    score1: currentUser.score1 + 1000,
+                    
+                }
+                var id = currentUser.currentUser._id;
+                Axios.post('http://localhost:5000/user/score1/'+id, points)
+            }
+            var div = document.getElementById(respons.name)
+            var form = document.getElementById(respons.name+'form')
+            var elements = form.elements
+            div.classList.remove('hover')
+            for(var i=0; i<elements.length;i++){
+                elements[i].disabled = true
+            }
         }
     }
     return(

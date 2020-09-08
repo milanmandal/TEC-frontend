@@ -23,6 +23,8 @@ const mapStateToProps = (state) => ({
   setCurrentUser: state.user.currentUser
 })
 
+
+
 class IntroductionPage extends Component {
     constructor(){
         super()
@@ -37,6 +39,14 @@ class IntroductionPage extends Component {
 
     componentDidMount(){
 
+
+        //ADDING PATH
+        const route = {
+          path:"/intro/"+this.props.match.params.id,
+        }
+        Axios.post('http://localhost:5000/path/'+this.props.match.params.id,route)
+        
+
         Axios.get('http://localhost:5000/user/'+this.props.match.params.id)
         .then(response => {
           if (response.status === 200) {
@@ -44,11 +54,7 @@ class IntroductionPage extends Component {
               CompanyName: response.data.company,
               
             })
-            if(response.data.page==2)
-            {
-              return <ComprehensionRules/>
-             
-            }
+            
             this.props.setCurrentUser(response.data)
             toast.success('You are alloted with the company '+response.data.company.toUpperCase())
           }

@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
 import Questions from '../../Components/Questions/Questions';
+import { connect } from 'react-redux';
 
-export default class SalesQuestions extends Component {
+
+
+class SalesQuestions extends Component {
     constructor(){
         super()
         this.state = {
@@ -11,6 +14,12 @@ export default class SalesQuestions extends Component {
     }
 
     componentDidMount(){
+        const route = {
+            path:`/comprehension/${this.props.currentUser.currentUser.companyName}/SalesQuestions`,
+          }
+          Axios.post('http://localhost:5000/path/'+this.props.currentUser.currentUser.id,route)
+
+
         Axios.get('http://localhost:5000/'+this.props.match.params.companyName+'/getsales',
         {
           headers:{
@@ -34,3 +43,9 @@ export default class SalesQuestions extends Component {
         else{window.location='/';}
     }
 }
+
+const mapStateToProps = (state) => ({
+    currentUser: state.user
+})
+
+export default connect(mapStateToProps)(SalesQuestions);

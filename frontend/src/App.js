@@ -1,7 +1,7 @@
-
 import React, { Component } from 'react';
 import{ Switch, Route } from 'react-router-dom';
 import Modal from 'react-modal';
+//import "bootstrap/dist/css/bootstrap.min.css";
 
 import './App.css';
 
@@ -19,7 +19,6 @@ import SalesQuestions from './Pages/SalesQuestions/SalesQuestions';
 import Timer from './Components/Timer/Timer';
 import RoundOneScore from './Pages/Round1Score/RoundOneScore';
 import { Provider } from 'react-redux';
-import RoundTwoScore from './Pages/Round2Score/RoundTwoScore'
 import store from './Redux/Store';
 import Round3Rules from './Pages/Round3Rules/Round3Rules';
 import ProductionCrisis1 from './Pages/ProductionCrisis1/ProductionCrisis1';
@@ -33,6 +32,7 @@ import SalesCrisis2 from './Pages/SalesCrisis2/SalesCrisis2';
 import RoundThreeScore from './Pages/Round3Score/RoundThreeScore';
 import Round2Rules from './Pages/Round2Rules.js/Round2Rules';
 import StockMarket from './Pages/Round2/Round2';
+import ScoreSheet from './Pages/ScoreSheet/ScoreSheet';
 
 Modal.setAppElement('#root')
 
@@ -55,6 +55,7 @@ class App extends Component{
     <div className="App">
     <div className='timer'>
       {window.location.pathname.substr(1,5) === 'intro' ? <Timer time={3600} currentPath='round1' /> : null}
+      {window.location.pathname.substr(1,6) === 'round2' ? <Timer time={2700} currentPath='round2' /> : null}
       {window.location.pathname.substr(1,6) === 'round3' ? <Timer time={3600} currentPath='round3' /> : null}
     </div>
     
@@ -73,7 +74,6 @@ class App extends Component{
       <Route exact path='/comprehension/:companyName/SalesQuestions' component={SalesQuestions} />
       <Route exact path='/round1/score' component={RoundOneScore} />
       <Route exact path='/round2/rules/:id' component={Round2Rules} />
-      <Route exact path='/round2/score' component={RoundTwoScore} />
       <Route exact path='/stockmarket' component={StockMarket} />
       <Route exact path='/crisis/production/1' component={ProductionCrisis1} />
       <Route exact path='/crisis/production/2' component={ProductionCrisis2} />
@@ -85,6 +85,7 @@ class App extends Component{
       <Route exact path='/crisis/sales/2' component={SalesCrisis2} />
       <Route exact path='/round3/rules/:id' component={Round3Rules} />
       <Route exact path='/round3/score' component={RoundThreeScore} />
+      <Route exact path='/scoresheet/:id' component={ScoreSheet} />
     </Switch>
     </Provider>
     </div>
@@ -93,4 +94,3 @@ class App extends Component{
 }
 
 export default App;
-

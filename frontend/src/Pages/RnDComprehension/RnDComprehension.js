@@ -3,8 +3,10 @@ import Comprehension from '../../Components/Comprehension/Comprehension';
 
 import './RnDComprehension.Styles.css'
 import Axios from 'axios';
+import { connect } from 'react-redux';
 
-export default class RnDComprehension extends Component {
+
+class RnDComprehension extends Component {
     constructor(){
         super()
         this.state={
@@ -13,6 +15,12 @@ export default class RnDComprehension extends Component {
     }
 
     componentDidMount(){
+
+        const route = {
+            path:`/comprehension/${this.props.currentUser.currentUser.companyName}/Resdev`,
+          }
+          Axios.post('http://localhost:5000/path/'+this.props.currentUser.currentUser.id,route)
+
         Axios.get('http://localhost:5000/company/info',
         {
           headers:{
@@ -39,3 +47,9 @@ export default class RnDComprehension extends Component {
         else{window.location='/';}
     }
 }
+
+const mapStateToProps = (state) => ({
+    currentUser: state.user
+})
+
+export default connect(mapStateToProps)(RnDComprehension);

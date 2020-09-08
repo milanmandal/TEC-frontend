@@ -17,3 +17,8 @@ export const updateInvestedCompanies = investedCompanies => ({
     type: 'UPDATE_INVESTED_COMPANIES',
     payload: investedCompanies
 })
+
+export const updateInvestmentScore = score => ({
+    type: 'UPDATE_INVESTMENT_SCORE',
+    payload: score
+})

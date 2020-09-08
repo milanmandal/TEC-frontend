@@ -9,10 +9,10 @@ class RoundThreeScore extends Component{
             return (
                 <React.Fragment>
                     <ScoreCard
-                        redirect={'/whatnext/'+this.props.currentUser.currentUser._id}
+                        redirect={'/scoresheet/'+this.props.currentUser.currentUser._id}
                         score={this.props.currentUser.score}
                         round="Round-3"
-                        nextRound="LeaderBoard" />
+                        nextRound="ScoreSheet" />
                 </React.Fragment>
             )
         }

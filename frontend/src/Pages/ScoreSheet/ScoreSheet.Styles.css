@@ -1,0 +1,19 @@
+.scoresheet-page{
+    color: white;
+}
+
+.scoresheet-page .green{
+    color: greenyellow;
+}
+
+.scoresheet-page .red{
+    color: orangered;
+}
+
+.scoresheet-page .companies{
+    
+}
+
+.scoresheet-page .company{
+    width: 50%;
+}

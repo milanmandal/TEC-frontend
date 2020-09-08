@@ -14,6 +14,8 @@ export default class HomePage extends Component {
             company:'',
             index:'',
             token:'null',
+            other:0,
+            path:''
             
         }
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -37,15 +39,30 @@ export default class HomePage extends Component {
                 if(res.status===200)
                 {
                     console.log(res.data)
+                    if(res.data.value)
+                    {
+                        console.log("Team Member Login");
+                        this.setState({
+                            other: res.data.value,
+                            company:res.data.company,
+                            index:res.data._id,
+                            token:res.data.token,
+                            path:res.data.page,
+                        })
 
-                    this.setState({
-                        redirectTo:true,
-                        company:res.data.company,
-                        index:res.data._id,
-                        token:res.data.token,
-                    })
-                    sessionStorage.setItem('usertoken', this.state.token);
-                    window.location=`/intro/`+this.state.index;
+                    }
+                    else
+                    {
+                        this.setState({
+                            redirectTo:true,
+                            company:res.data.company,
+                            index:res.data._id,
+                            token:res.data.token,
+                            path:res.data.page
+                        })
+                        sessionStorage.setItem('usertoken', this.state.token);
+                        window.location='/intro/'+this.state.index;
+                    }
                 }
                 
             } )

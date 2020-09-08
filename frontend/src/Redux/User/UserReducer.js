@@ -26,6 +26,11 @@ const userReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 investedCompanies: action.payload
             }
+        case 'UPDATE_INVESTMENT_SCORE':
+            return{
+                ...state,
+                score: action.payload
+            }
         default:
             return state;
     }

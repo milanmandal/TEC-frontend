@@ -22,7 +22,7 @@ const Crisis = ({heading, crisis, question, options, redirect, currentUser, upda
         .then(response => {
           if (response.status === 200) {
             
-                score=response.data.score;
+                score=response.data.score3;
           }
         })
         .catch((error) => {
@@ -36,16 +36,13 @@ const Crisis = ({heading, crisis, question, options, redirect, currentUser, upda
             const respons = response[response.length-1];
             updateScoreCrisis({currentScore: currentUser.score, addScore: respons.value})
             score=score+parseInt(respons.value)
-            console.log(score);
             const points = {
-                email:currentUser.currentUser.email,
-                password:currentUser.currentUser.password,
-                company:currentUser.currentUser.company,
-                score: score,
-                token:currentUser.currentUser.token,
+                
+                score3: score,
+                
             }
             var id = currentUser.currentUser._id;
-            Axios.post('http://localhost:5000/user/score/'+id, points)
+            Axios.post('http://localhost:5000/user/score3/'+id, points)
         }
     }
 

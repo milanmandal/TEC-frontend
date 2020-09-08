@@ -6,9 +6,20 @@ import './ComprehensionRules.Styles.css';
 import Header from '../../Components/Header/Header';
 import Axios from 'axios';
 
+const mapStateToProps = (state) => ({
+    currentUser: state.user
+})
 const ComprehensionRules = ({match}) => {
     
     const allotedCompanyName = match.params.companyName;
+    /*const data = mapStateToProps();
+    console.log(data);
+    useEffect(()=>{
+        const route = {
+            path:'/comprehensionRules/'+allotedCompanyName,
+          }
+          Axios.post('http://localhost:5000/path/'+this.state.currentUser.currentUser.id,route)
+    })*/
    
 
     
@@ -48,5 +59,7 @@ const ComprehensionRules = ({match}) => {
         window.location='/';
     }
 }
+
+
 
 export default ComprehensionRules;

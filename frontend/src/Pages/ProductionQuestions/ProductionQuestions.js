@@ -4,8 +4,11 @@ import Questions from '../../Components/Questions/Questions';
 import { toast, ToastContainer } from 'react-toastify';
 
 import './ProductionQuestion.Styles.css'
+import { connect } from 'react-redux';
 
-export default class ProductionQuestions extends Component {
+
+
+class ProductionQuestions extends Component {
     constructor(){
         super()
         this.state = {
@@ -14,6 +17,11 @@ export default class ProductionQuestions extends Component {
     }
 
     componentDidMount(){
+        const route = {
+            path:`/comprehension/${this.props.currentUser.currentUser.companyName}/ProductionQuestions`
+          }
+          Axios.post('http://localhost:5000/path/'+this.props.currentUser.currentUser.id,route)
+        
         toast.warn("You are NOT allowed to CHANGE the answer after submitting")
         Axios.get('http://localhost:5000/'+this.props.match.params.companyName+'/getproduction',
         {
@@ -39,3 +47,9 @@ export default class ProductionQuestions extends Component {
         else{window.location='/';}
     }
 }
+
+const mapStateToProps = (state) => ({
+    currentUser: state.user
+})
+
+export default connect(mapStateToProps)(ProductionQuestions);
