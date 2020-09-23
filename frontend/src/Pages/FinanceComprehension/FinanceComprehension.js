@@ -5,8 +5,6 @@ import './FinanceComprehension.Styles.css'
 import Axios from 'axios';
 import { connect } from 'react-redux';
 
-
-
 class FinanceComprehension extends Component {
     constructor(){
         super()
@@ -16,12 +14,6 @@ class FinanceComprehension extends Component {
     }
 
     componentDidMount(){
-        const route = {
-            path:`/comprehension/${this.props.currentUser.currentUser.companyName}/Finance`
-          }
-          Axios.post('http://localhost:5000/path/'+this.props.currentUser.currentUser.id,route)
-
-
         Axios.get('http://localhost:5000/company/info',
         {
           headers:{
@@ -35,12 +27,12 @@ class FinanceComprehension extends Component {
     }
 
     render() {
-        if(sessionStorage.usertoken)
+        if(sessionStorage.usertoken && this.props.currentUser.currentUser)
         {
         return (
             this.state.financeComprehension ? 
             <div className='finance-comprehension-page'>
-               <Comprehension comprehensionName='finance' comprehension={this.state.financeComprehension} redirect={this.props.match.url+'Questions'} />
+               <Comprehension comprehensionName='finance' comprehension={this.state.financeComprehension} currentPath={this.props.match.url} redirect={this.props.match.url+'Questions'} />
             </div>
             : <div className='loading'>Loading...</div>
         )

@@ -8,26 +8,31 @@ import Axios from 'axios';
 
 class Round2Rules extends Component {
 
-    componentDidMount(){
-        Axios.get('http://localhost:5000/user/'+this.props.match.params.id,
-        {
-          headers:{
-            "authorization":"Bearer "+sessionStorage.usertoken
-          }
-        })
-        .then(response => {
-          if (response.status === 200) {
-            this.props.setCurrentUser(response.data)
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        })
+    componentDidMount() {
+        Axios.get('http://localhost:5000/user/' + this.props.match.params.id,
+            {
+                headers: {
+                    "authorization": "Bearer " + sessionStorage.usertoken
+                }
+            })
+            .then(response => {
+                if (response.status === 200) {
+                    this.props.setCurrentUser(response.data)
+                    const route = {
+                        path: this.props.match.url,
+                    }
+                    Axios.post('http://localhost:5000/user/path/' + response.data._id, route)
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+        localStorage.setItem("Round", "Round2")
     }
 
-    render(){
-        if(sessionStorage.usertoken){
-            return(
+    render() {
+        if (sessionStorage.usertoken) {
+            return (
                 <div className='comprehension-rules-container'>
                     <div className='comprehesion-rules'>
                         <Header heading='Round-2 Rules' />
@@ -38,7 +43,7 @@ class Round2Rules extends Component {
                                 <li>The company portfolio includes a news clipping and a graph of the stock pertaining to the company as shown below. The news clipping serves to give you an idea of how the graph might proceed in the future.</li>
                                 <li>The capital that you can invest is calculated from the number of correct answers provided in round 1. </li>
                                 <li>You can invest your capital in any combination but you are not allowed to invest more money than you earned in the previous round</li>
-                                <li>There will be a minimum no. of stocks for each company in which a participant can invest. The number of minimum stocks will be different for each company. 
+                                <li>There will be a minimum no. of stocks for each company in which a participant can invest. The number of minimum stocks will be different for each company.
                                 For example, Min shares for Reliance is 4. Once you will fulfil the above criterion, you’ll be eligible to buy any (greater than 4) no. of stocks for Reliance.
                                 </li>
                                 <li>Say for example you have invested in a stock which is listed at ₹100 and the graph gains 2% subsequently then you will receive a return of ₹102 and make a gain of ₹2.</li>
@@ -53,14 +58,14 @@ class Round2Rules extends Component {
                     </div>
                 </div>
             )
-        }else{
-            window.location='/';
+        } else {
+            window.location = '/';
         }
     }
 }
 
 const mapStateToProps = (state) => ({
-    currentUser: state.user.currentUser
+    currentUser: state.user
 });
 
 const mapDispatchToProps = dispatch => ({

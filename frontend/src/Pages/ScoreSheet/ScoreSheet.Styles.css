@@ -1,5 +1,8 @@
 .scoresheet-page{
     color: white;
+    padding: 100px 50px;
+    margin: 0;
+    position: relative;
 }
 
 .scoresheet-page .green{
@@ -14,6 +17,105 @@
     
 }
 
+.scoresheet-page .round1{
+    background: #333;
+    padding: 20px;
+    position: relative;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.scoresheet-page .round1:before{
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    background: linear-gradient(180deg, #2ba15f,#f8d229);
+    z-index: -2;
+    transition: 0.5s;
+}
+
+.scoresheet-page .round1 h1{
+    font-size: 40px;
+    letter-spacing: 4px;
+}
+
+.scoresheet-page .round1 h3{
+    font-size: 24px;
+    letter-spacing: 2px;
+}
+
+.scoresheet-page .round3{
+    background: #333;
+    padding: 20px;
+    position: relative;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.scoresheet-page .round3:before{
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    background: linear-gradient(180deg, #2ba15f,#f8d229);
+    z-index: -2;
+    transition: 0.5s;
+}
+
+.scoresheet-page .round3 h1{
+    font-size: 40px;
+    letter-spacing: 4px;
+}
+
+.scoresheet-page .round3 h3{
+    font-size: 24px;
+    letter-spacing: 2px;
+}
+
 .scoresheet-page .company{
     width: 50%;
+    margin: 0 25%;
+}
+
+.scoresheet-page .round2{
+    background: #333;
+    padding: 20px;
+    position: relative;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.scoresheet-page .round2:before{
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    background: linear-gradient(180deg, #2ba15f,#f8d229);
+    z-index: -2;
+    transition: 0.5s;
+}
+
+.scoresheet-page .round2 h1{
+    font-size: 40px;
+    letter-spacing: 4px;
+}
+
+.scoresheet-page .round2 h3{
+    font-size: 24px;
+    letter-spacing: 2px;
+}
+
+.scoresheet-page .round2 p{
+    font-size: 20px;
+}
+
+.scoresheet-page .total-round2{
+    margin-top: 20px;
 }

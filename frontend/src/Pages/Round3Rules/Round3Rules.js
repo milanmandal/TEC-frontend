@@ -8,26 +8,31 @@ import Axios from 'axios';
 
 class Round3Rules extends Component {
 
-    componentDidMount(){
-        Axios.get('http://localhost:5000/user/'+this.props.match.params.id,
-        {
-          headers:{
-            "authorization":"Bearer "+sessionStorage.usertoken
-          }
-        })
-        .then(response => {
-          if (response.status === 200) {
-            this.props.setCurrentUser(response.data)
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        })
+    componentDidMount() {
+        Axios.get('http://localhost:5000/user/' + this.props.match.params.id,
+            {
+                headers: {
+                    "authorization": "Bearer " + sessionStorage.usertoken
+                }
+            })
+            .then(response => {
+                if (response.status === 200) {
+                    this.props.setCurrentUser(response.data)
+                    const route = {
+                        path: this.props.match.url,
+                    }
+                    Axios.post('http://localhost:5000/user/path/' + response.data._id, route)
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+        localStorage.setItem("Round", "Round3")
     }
 
-    render(){
-        if(sessionStorage.usertoken){
-            return(
+    render() {
+        if (sessionStorage.usertoken) {
+            return (
                 <div className='comprehension-rules-container'>
                     <div className='comprehesion-rules'>
                         <Header heading='Round-3 Rules' />
@@ -35,7 +40,7 @@ class Round3Rules extends Component {
                             <ol>
                                 <li>A crisis on all the four domains/verticals would be given.</li>
                                 <li>
-                                    Four/verticals domain are as follow: 
+                                    Four/verticals domain are as follow:
                                     <ul>
                                         <li>Finance</li>
                                         <li>Sales</li>
@@ -65,8 +70,8 @@ class Round3Rules extends Component {
                     </div>
                 </div>
             )
-        }else{
-            window.location='/';
+        } else {
+            window.location = '/';
         }
     }
 }

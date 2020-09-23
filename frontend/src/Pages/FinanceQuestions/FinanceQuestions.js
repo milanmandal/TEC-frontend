@@ -3,10 +3,6 @@ import Axios from 'axios';
 import Questions from '../../Components/Questions/Questions';
 import { connect } from 'react-redux';
 
-
-
-
-
 class FinanceQuestions extends Component {
     constructor(){
         super()
@@ -16,13 +12,6 @@ class FinanceQuestions extends Component {
     }
 
     componentDidMount(){
-
-        const route = {
-            path:`/comprehension/${this.props.currentUser.currentUser.companyName}/FinanceQuestions`
-          }
-          Axios.post('http://localhost:5000/path/'+this.props.currentUser.currentUser.id,route)
-        
-        
         Axios.get('http://localhost:5000/'+this.props.match.params.companyName+'/getfinance',
         {
           headers:{
@@ -30,18 +19,21 @@ class FinanceQuestions extends Component {
           }
         })
         .then(res => this.setState({financeQuestions: res.data}))
-        
-       
     }
 
     render() {
-        if(sessionStorage.usertoken)
+        if(sessionStorage.usertoken && this.props.currentUser.currentUser)
         {
         return (
             
             this.state.financeQuestions ?
-            <div>
-                <Questions redirect={'/comprehension/'+this.props.match.params.companyName+'/Resdev'} questions={this.state.financeQuestions} questionsName='Finance Questions' />
+            <div className='questions-page-container'>
+                <Questions
+                    redirect={'/comprehension/'+this.props.match.params.companyName+'/Resdev'}
+                    questions={this.state.financeQuestions}
+                    questionsName='Finance Questions'
+                    currentPath={this.props.match.url}    
+                />
             </div>
             : <div className='loading'>Loading...</div>
         )

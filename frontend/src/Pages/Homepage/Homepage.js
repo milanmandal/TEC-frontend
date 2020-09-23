@@ -5,18 +5,19 @@ import axios from 'axios';
 import './Homepage.Styles.css';
 
 export default class HomePage extends Component {
-    constructor(){
+    constructor() {
         super();
-        this.state={
+        this.state = {
             email: '',
             password: '',
             redirectTo: false,
-            company:'',
-            index:'',
-            token:'null',
-            other:0,
-            path:''
-            
+            company: '',
+            index: '',
+            token: 'null',
+            other: 0,
+            path: '',
+            redirect: '/',
+            control:'',
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleEmail = this.handleEmail.bind(this);
@@ -28,69 +29,82 @@ export default class HomePage extends Component {
         const user = {
             email: this.state.email,
             password: this.state.password
-            
-          }
-      
-          
-      
-          axios.post('http://localhost:5000/user/login', user)
-            .then(res =>{
-                
-                if(res.status===200)
-                {
-                    console.log(res.data)
-                    if(res.data.value)
-                    {
-                        console.log("Team Member Login");
-                        this.setState({
-                            other: res.data.value,
-                            company:res.data.company,
-                            index:res.data._id,
-                            token:res.data.token,
-                            path:res.data.page,
-                        })
+        }
 
-                    }
-                    else
-                    {
-                        this.setState({
-                            redirectTo:true,
-                            company:res.data.company,
-                            index:res.data._id,
-                            token:res.data.token,
-                            path:res.data.page
-                        })
-                        sessionStorage.setItem('usertoken', this.state.token);
-                        window.location='/intro/'+this.state.index;
-                    }
+        axios.get('http://localhost:5000/admin/control')
+            .then(response => {
+
+                console.log(response.data)
+
+                this.setState({control:response.data[0].round1});
+                console.log(this.state.control)
+                if(response.data[0].round1==='1')
+                {
+                    
+                    axios.post('http://localhost:5000/user/login', user)
+                    .then(res => {
+                        if (res.status === 200) {
+                            console.log(res.data)
+                            if (res.data.value) {
+                                console.log("Team Member Login");
+                                this.setState({
+                                    other: res.data.value,
+                                    company: res.data.company,
+                                    index: res.data._id,
+                                    token: res.data.token,
+                                    path: res.data.page,
+                                })
+        
+                            }
+                            else {
+                                this.setState({
+                                    redirectTo: true,
+                                    company: res.data.company,
+                                    index: res.data._id,
+                                    token: res.data.token,
+                                    path: res.data.page
+                                })
+                                sessionStorage.setItem('usertoken', this.state.token);
+                                window.location = '/redirect/' + this.state.index;
+                                //this.setState({redirect: '/intro/'+this.state.index})
+                            }
+                        }
+        
+                    })
+                    .catch(error => {
+                        window.location = '/';
+                        window.alert('invalid credentials')
+                        console.log(error)
+                    })
+                }
+                else
+                {
+                    window.location='/';
+                    window.alert("ROUND ONE IS YET TO START")
                 }
                 
-            } )
-            .catch(error => {
-                window.location ='/';
-                window.alert('invalid credentials')
-                console.log(error)
-                })
+            })
+       
+        
     }
 
     handleEmail(e) {
         e.preventDefault();
         this.setState({
-            email:e.target.value
+            email: e.target.value
         })
     }
 
 
-    handlePass(e)
-    {
+    handlePass(e) {
         e.preventDefault();
         this.setState({
-            password:e.target.value
+            password: e.target.value
         })
     }
 
     render() {
-        
+
         return (
             <div className='container'>
                 <div className='logo-container'>
@@ -103,7 +117,7 @@ export default class HomePage extends Component {
                         <form className='input' onSubmit={this.handleSubmit}>
                             <div className='input-box'>
                                 <label>Email</label>
-                                <input name='email' placeholder='John@gmail.com' type='email'  onChange={this.handleEmail} required />
+                                <input name='email' placeholder='John@gmail.com' type='email' onChange={this.handleEmail} required />
                             </div>
                             <div className='input-box'>
                                 <label>Password</label>
@@ -114,7 +128,7 @@ export default class HomePage extends Component {
                             </div>
                         </form>
 
-                    </div>    
+                    </div>
                 </div>
             </div>
         )

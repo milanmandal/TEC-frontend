@@ -4,9 +4,16 @@ import { connect } from 'react-redux';
 import './ScoreCard.Styles.css'
 
 
-const ScoreCard = ({redirect, score, round, nextRound}) => {
+const ScoreCard = ({redirect, score, round, nextRound, control}) => {
     const onclick = () => {
+
+        if(control==1)
+        {
         window.location = redirect
+        }
+        else{
+            window.alert(`${round} IS YET TO START`)
+        }
     }
 
     const createSquare = () => {

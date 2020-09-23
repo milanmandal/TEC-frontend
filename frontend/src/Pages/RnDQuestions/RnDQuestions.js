@@ -3,10 +3,6 @@ import Axios from 'axios';
 import Questions from '../../Components/Questions/Questions';
 import { connect } from 'react-redux';
 
-
-const mapStateToProps = (state) => ({
-    currentUser: state.user
-})
 class RnDQuestions extends Component {
     constructor(){
         super()
@@ -16,12 +12,6 @@ class RnDQuestions extends Component {
     }
 
     componentDidMount(){
-        const route = {
-            path:`/comprehension/${this.props.currentUser.currentUser.companyName}/ResdevQuestions`,
-          }
-          Axios.post('http://localhost:5000/path/'+this.props.currentUser.currentUser.id,route)
-
-
         Axios.get('http://localhost:5000/'+this.props.match.params.companyName+'/getresdev',
         {
           headers:{
@@ -32,12 +22,17 @@ class RnDQuestions extends Component {
     }
 
     render() {
-        if(sessionStorage.usertoken)
+        if(sessionStorage.usertoken && this.props.currentUser.currentUser)
         {
         return (
             this.state.rndQuestions ?
-            <div>
-                <Questions redirect={'/comprehension/'+this.props.match.params.companyName+'/Sales'} questions={this.state.rndQuestions} questionsName='R&D Questions' />
+            <div className='questions-page-container'>
+                <Questions
+                    redirect={'/comprehension/'+this.props.match.params.companyName+'/Sales'}
+                    questions={this.state.rndQuestions}
+                    questionsName='R&D Questions'
+                    currentPath={this.props.match.url}
+                />
             </div>
             : <div className='loading'>Loading...</div>
         )
@@ -49,6 +44,8 @@ class RnDQuestions extends Component {
     }
 }
 
-
+const mapStateToProps = (state) => ({
+    currentUser: state.user
+})
 
 export default connect(mapStateToProps)(RnDQuestions);

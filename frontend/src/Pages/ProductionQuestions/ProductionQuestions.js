@@ -3,10 +3,8 @@ import Axios from 'axios';
 import Questions from '../../Components/Questions/Questions';
 import { toast, ToastContainer } from 'react-toastify';
 
-import './ProductionQuestion.Styles.css'
+import './ProductionQuestion.Styles.css';
 import { connect } from 'react-redux';
-
-
 
 class ProductionQuestions extends Component {
     constructor(){
@@ -17,11 +15,6 @@ class ProductionQuestions extends Component {
     }
 
     componentDidMount(){
-        const route = {
-            path:`/comprehension/${this.props.currentUser.currentUser.companyName}/ProductionQuestions`
-          }
-          Axios.post('http://localhost:5000/path/'+this.props.currentUser.currentUser.id,route)
-        
         toast.warn("You are NOT allowed to CHANGE the answer after submitting")
         Axios.get('http://localhost:5000/'+this.props.match.params.companyName+'/getproduction',
         {
@@ -33,13 +26,18 @@ class ProductionQuestions extends Component {
     }
 
     render() {
-        if(sessionStorage.usertoken)
+        if(sessionStorage.usertoken && this.props.currentUser.currentUser)
         {
         return (
             this.state.productionQuestions ?
-            <div>
+            <div className='questions-page-container'>
                 <ToastContainer className='alert' />
-                <Questions redirect={'/comprehension/'+this.props.match.params.companyName+'/Finance'} questions={this.state.productionQuestions} questionsName='Production Questions' />
+                <Questions
+                    redirect={'/comprehension/'+this.props.match.params.companyName+'/Finance'}
+                    questions={this.state.productionQuestions}
+                    questionsName='Production Questions'
+                    currentPath={this.props.match.url}
+                />
             </div>
             : <div className='loading'>Loading...</div>
         )

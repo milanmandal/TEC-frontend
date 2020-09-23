@@ -4,7 +4,7 @@ import Axios from 'axios'
 import { connect } from 'react-redux'
 
 class SalesCrisis2 extends Component {
-    constructor(){
+    constructor() {
         super()
         this.state = {
             crisis: null,
@@ -13,31 +13,39 @@ class SalesCrisis2 extends Component {
         }
     }
 
-    componentDidMount(){
+    componentDidMount() {
         Axios.get('http://localhost:5000/' + this.props.currentUser.currentUser.company + '/getcrisissales',
-        {
-          headers:{
-            "authorization":"Bearer "+sessionStorage.usertoken
-          }
-        })
-        .then(res => this.setState({
-            crisis: res.data[1].passage,
-            question: res.data[1].question,
-            options: [res.data[1].option1, res.data[1].option2, res.data[1].option3, res.data[1].option4]
-        })
-    )}
+            {
+                headers: {
+                    "authorization": "Bearer " + sessionStorage.usertoken
+                }
+            })
+            .then(res => this.setState({
+                crisis: res.data[1].passage,
+                question: res.data[1].question,
+                options: [res.data[1].option1, res.data[1].option2, res.data[1].option3, res.data[1].option4]
+            })
+            )
+    }
 
     render() {
-        if(sessionStorage.usertoken){
+        if (sessionStorage.usertoken && this.props.currentUser.currentUser) {
             return (
-                this.state.crisis && this.state.question && this.state.options ? 
-                <div className='crisis-page'>
-                    <Crisis heading='Sales 02' crisis={this.state.crisis} question={this.state.question} options={this.state.options} redirect='/round3/score'/>
-                </div>
-                : <div className='loading'>Loading...</div>
+                this.state.crisis && this.state.question && this.state.options ?
+                    <div className='crisis-page'>
+                        <Crisis
+                            heading='Sales 02'
+                            crisis={this.state.crisis}
+                            question={this.state.question}
+                            options={this.state.options}
+                            redirect='/round3/score'
+                            currentPath={this.props.match.url}
+                        />
+                    </div>
+                    : <div className='loading'>Loading...</div>
             )
         }
-        else{window.location='/';}
+        else { window.location = '/'; }
     }
 }
 

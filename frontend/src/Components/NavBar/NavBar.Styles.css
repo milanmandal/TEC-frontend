@@ -1,0 +1,38 @@
+.navbar{
+    width: 100%;
+    height: 60px;
+    background: #f8d229;
+    position: fixed;
+    z-index: 5;
+}
+
+.navbar .timer{
+    margin-right: 50px;
+    float: right;
+    font-size: 40px;
+    z-index: 2;
+}
+
+.navbar .logout-btn{
+    float: right;
+    margin-right: 50px;
+    margin-top: 10px;
+    height: 40px;
+    width: 5%;
+    font-size: large;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    box-shadow: transparent;
+    transform: scale(0.95);
+    transition: all 0.5s cubic-bezier(0.445, 0.05, 0, 1);
+}
+
+.navbar .logout-btn:hover{
+    transform: scale(1);
+    border: 1px solid black;
+}
+
+.navbar .logout-btn:active{
+    transform: scale(0.95);
+}

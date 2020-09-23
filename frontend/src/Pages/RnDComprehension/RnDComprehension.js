@@ -15,12 +15,6 @@ class RnDComprehension extends Component {
     }
 
     componentDidMount(){
-
-        const route = {
-            path:`/comprehension/${this.props.currentUser.currentUser.companyName}/Resdev`,
-          }
-          Axios.post('http://localhost:5000/path/'+this.props.currentUser.currentUser.id,route)
-
         Axios.get('http://localhost:5000/company/info',
         {
           headers:{
@@ -34,12 +28,12 @@ class RnDComprehension extends Component {
     }
 
     render() {
-        if(sessionStorage.usertoken)
+        if(sessionStorage.usertoken && this.props.currentUser.currentUser)
         {
         return (
             this.state.rndComprehension ? 
             <div className='rnd-comprehension-page'>
-               <Comprehension comprehensionName='r&d' comprehension={this.state.rndComprehension} redirect={this.props.match.url+'Questions'} />
+               <Comprehension comprehensionName='r&d' comprehension={this.state.rndComprehension} currentPath={this.props.match.url} redirect={this.props.match.url+'Questions'} />
             </div>
             : <div className='loading'>Loading...</div>
         )

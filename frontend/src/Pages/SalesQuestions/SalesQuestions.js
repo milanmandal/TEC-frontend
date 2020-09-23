@@ -3,8 +3,6 @@ import Axios from 'axios';
 import Questions from '../../Components/Questions/Questions';
 import { connect } from 'react-redux';
 
-
-
 class SalesQuestions extends Component {
     constructor(){
         super()
@@ -14,12 +12,6 @@ class SalesQuestions extends Component {
     }
 
     componentDidMount(){
-        const route = {
-            path:`/comprehension/${this.props.currentUser.currentUser.companyName}/SalesQuestions`,
-          }
-          Axios.post('http://localhost:5000/path/'+this.props.currentUser.currentUser.id,route)
-
-
         Axios.get('http://localhost:5000/'+this.props.match.params.companyName+'/getsales',
         {
           headers:{
@@ -30,12 +22,17 @@ class SalesQuestions extends Component {
     }
 
     render() {
-        if(sessionStorage.usertoken)
+        if(sessionStorage.usertoken && this.props.currentUser.currentUser)
         {
             return (
                 this.state.salesQuestions ?
-                <div>
-                    <Questions redirect={'/round1/score'} questions={this.state.salesQuestions} questionsName='Sales Questions' />
+                <div className='questions-page-container'>
+                    <Questions
+                        redirect={'/round1/score'}
+                        questions={this.state.salesQuestions}
+                        questionsName='Sales Questions'
+                        currentPath={this.props.match.url}
+                    />
                 </div>
                 : <div className='loading'>Loading...</div>
             )

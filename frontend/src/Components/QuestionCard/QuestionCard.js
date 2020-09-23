@@ -1,64 +1,77 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import './QuestionCard.Styles.css';
 import { updateScore } from '../../Redux/User/UserActions';
 import Axios from 'axios';
 
-const QuestionCard = ({questionDetails, index, currentUser, updateScore}) => {
+const QuestionCard = ({ questionDetails, index, currentUser, updateScore, questions }) => {
+    useEffect(() => {
+        if (eval('currentUser.currentUser.q' + (index + 1)) === 1) {
+            var div = document.getElementById(questions[index]._id)
+            div.classList.remove('hover')
+            var form = document.getElementById(questions[index]._id + 'form')
+            var elements = form.elements
+            for (var i = 0; i < elements.length; i++) {
+                elements[i].disabled = true
+            }
+        }
+    })
     const { _id, question, answer } = questionDetails;
 
-    const options=[questionDetails.option1, questionDetails.option2, questionDetails.option3, questionDetails.option4]
+    const options = [questionDetails.option1, questionDetails.option2, questionDetails.option3, questionDetails.option4]
 
-    const response=[]
+    const response = []
 
-    const result=[]
+    const result = []
 
     const onChangeMcqs = (e) => {
-        const {name,value} =e.target;
-        const data = {name, value}
+        const { name, value } = e.target;
+        const data = { name, value }
         response.push(data)
     }
-    
+
     const onSubmitMcqs = (e) => {
         e.preventDefault();
-        const respons = response[response.length-1];
-        if(respons){
-            respons.value === answer ? result.push(true)  : result.push(false)
-            if(result[result.length-1] === true) {
+        const respons = response[response.length - 1];
+        if (respons) {
+            respons.value === answer ? result.push(true) : result.push(false)
+            const question = {
+                flag: 1  //answered
+            }
+            Axios.post('http://localhost:5000/user/question/' + parseInt(index + 1) + '/' + currentUser.currentUser._id, question)
+            if (result[result.length - 1] === true) {
                 updateScore(currentUser.score)
-                
+
                 const points = {
-                    
-                    score1: currentUser.score1 + 1000,
-                    
+                    score1: currentUser.currentUser.score1 + currentUser.score + 1000,
                 }
                 var id = currentUser.currentUser._id;
-                Axios.post('http://localhost:5000/user/score1/'+id, points)
+                Axios.post('http://localhost:5000/user/score1/' + id, points)
             }
             var div = document.getElementById(respons.name)
-            var form = document.getElementById(respons.name+'form')
+            var form = document.getElementById(respons.name + 'form')
             var elements = form.elements
             div.classList.remove('hover')
-            for(var i=0; i<elements.length;i++){
+            for (var i = 0; i < elements.length; i++) {
                 elements[i].disabled = true
             }
         }
     }
-    return(
+    return (
         <div>
-        <div  id={_id} className='mcq-container hover'>
-            <div className='mcq' onChange={onChangeMcqs}>
-                {index<9? <h2>0{index+1}</h2>:<h2>{index+1}</h2>}
-                <h3>{question}</h3>
-                <form id={_id+'form'} onSubmit={onSubmitMcqs}>
-                    {
-                        options.map( (option, index) => <div className='options' key={index+1}><input type='radio' name={_id} value={String.fromCharCode(97+index)} /><label>{option.toUpperCase()}</label></div> )
-                    }
-                    <button type='submit' id='submit-btn'>Submit</button>
-                </form>
+            <div id={_id} className='mcq-container hover'>
+                <div className='mcq' onChange={onChangeMcqs}>
+                    {index < 9 ? <h2>0{index + 1}</h2> : <h2>{index + 1}</h2>}
+                    <h3>{question}</h3>
+                    <form id={_id + 'form'} onSubmit={onSubmitMcqs}>
+                        {
+                            options.map((option, index) => <div className='options' key={index + 1}><input type='radio' name={_id} value={String.fromCharCode(97 + index)} /><label>{option.toUpperCase()}</label></div>)
+                        }
+                        <button type='submit' id='submit-btn'>Submit</button>
+                    </form>
+                </div>
             </div>
-        </div>
         </div>
     )
 }

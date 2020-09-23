@@ -5,29 +5,15 @@ import './ProductionComprehension.Styles.css'
 import Axios from 'axios';
 import { connect } from 'react-redux';
 
-var id;
-
 class ProductionComprehension extends Component {
     constructor(){
         super()
         this.state={
-            productionComprehension: '',
-            ID:''
+            productionComprehension: ''
         }
     }
 
-    
-
     componentDidMount(){
-
-        this.setState({ID:this.props.currentUser.currentUser._id})
-
-        id = this.state.ID;
-        const route = {
-            path:`/comprehension/${this.props.currentUser.currentUser.companyName}/Production`,
-          }
-          Axios.post('http://localhost:5000/path/'+id,route)
-
         Axios.get('http://localhost:5000/company/info',
         {
           headers:{
@@ -43,12 +29,12 @@ class ProductionComprehension extends Component {
     }
 
     render() {
-        if(sessionStorage.usertoken)
+        if(sessionStorage.usertoken && this.props.currentUser.currentUser)
         {
         return (
             this.state.productionComprehension ? 
             <div className='production-comprehension-page'>
-               <Comprehension comprehensionName='production' comprehension={this.state.productionComprehension} redirect={this.props.match.url+'Questions'} />
+               <Comprehension comprehensionName='production' comprehension={this.state.productionComprehension} currentPath={this.props.match.url} redirect={this.props.match.url+'Questions'} />
             </div>
             : <div className='loading'>Loading...</div>
         )

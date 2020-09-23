@@ -28,12 +28,19 @@ class ProductionCrisis1 extends Component {
     )}
 
     render() {
-        if(sessionStorage.usertoken)
+        if(sessionStorage.usertoken && this.props.currentUser.currentUser)
         {
             return (
                 this.state.crisis && this.state.question && this.state.options ? 
                 <div className='crisis-page'>
-                    <Crisis heading='Production 01' crisis={this.state.crisis} question={this.state.question} options={this.state.options} redirect='/crisis/production/2'/>
+                    <Crisis
+                        heading='Production 01'
+                        crisis={this.state.crisis}
+                        question={this.state.question}
+                        options={this.state.options}
+                        redirect='/crisis/production/2'
+                        currentPath={this.props.match.url}    
+                    />
                 </div>
                 : <div className='loading'>Loading...</div>
             )

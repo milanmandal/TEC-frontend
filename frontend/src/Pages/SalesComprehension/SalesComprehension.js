@@ -15,12 +15,6 @@ class SalesComprehension extends Component {
     }
 
     componentDidMount(){
-        const route = {
-            path:`/comprehension/${this.props.currentUser.currentUser.companyName}/Sales`,
-          }
-          Axios.post('http://localhost:5000/path/'+this.props.currentUser.currentUser.id,route)
-
-
         Axios.get('http://localhost:5000/company/info',
         {
           headers:{
@@ -34,12 +28,12 @@ class SalesComprehension extends Component {
     }
 
     render() {
-        if(sessionStorage.usertoken)
+        if(sessionStorage.usertoken && this.props.currentUser.currentUser)
         {
             return (
                 this.state.salesComprehension ? 
                 <div className='sales-comprehension-page'>
-                <Comprehension comprehensionName='sales' comprehension={this.state.salesComprehension} redirect={this.props.match.url+'Questions'} />
+                <Comprehension comprehensionName='sales' comprehension={this.state.salesComprehension} currentPath={this.props.match.url} redirect={this.props.match.url+'Questions'} />
                 </div>
                 : <div className='loading'>Loading...</div>
             )
