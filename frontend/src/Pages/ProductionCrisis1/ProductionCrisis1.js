@@ -10,7 +10,8 @@ class ProductionCrisis1 extends Component {
         this.state = {
             crisis: null,
             question: null,
-            options: []
+            options: [],
+            id:'',
         }
     }
 
@@ -24,7 +25,8 @@ class ProductionCrisis1 extends Component {
             .then(res => this.setState({
                 crisis: res.data[0].passage,
                 question: res.data[0].question,
-                options: [res.data[0].option1, res.data[0].option2, res.data[0].option3, res.data[0].option4]
+                options: [res.data[0].option1, res.data[0].option2, res.data[0].option3, res.data[0].option4],
+                id : res.dat[0].id
             })
             )
     }
@@ -41,6 +43,8 @@ class ProductionCrisis1 extends Component {
                             options={this.state.options}
                             redirect='/crisis/production/2'
                             currentPath={this.props.match.url}
+                            id={this.state.id}
+                            domain= "production"
                         />
                     </div>
                     : <div className='loading'>Loading...</div>
