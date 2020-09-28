@@ -52,7 +52,7 @@ const QuestionCard = ({
     if (respons) {
       const answer = { answer: respons.value };
 
-      Axios.patch(
+      Axios.post(
         url +
           company +
           "/answer/" +

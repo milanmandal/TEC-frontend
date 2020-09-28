@@ -10,7 +10,7 @@ import url from '../Url/Url';
 const Crisis = ({ heading, domain, crisis, question, options, redirect, currentUser, updateScoreCrisis, currentPath, id }) => {
 
     const response = []
-    
+    //let score = 0
 
     const onchange = (e) => {
         const { name, value } = e.target;
@@ -21,7 +21,7 @@ const Crisis = ({ heading, domain, crisis, question, options, redirect, currentU
         Axios.get(url + 'user/' + currentUser.currentUser._id)
             .then(response => {
                 if (response.status === 200) {
-                    //score = response.data.score3;
+                   // score = response.data.score3;
                 }
             })
             .catch((error) => {
@@ -42,7 +42,7 @@ const Crisis = ({ heading, domain, crisis, question, options, redirect, currentU
             const  answer={
                 answer : respons.value
             }
-            Axios.post(url+currentUser.currentUser.company+'/crisis/'+domain+'/'+currentUser.currentUser._id, answer)
+            Axios.post(url+currentUser.currentUser.company+'/crisis/'+domain+'/'+ id+'/'+currentUser.currentUser._id, answer)
            
         }
     }

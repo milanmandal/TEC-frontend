@@ -26,7 +26,7 @@ class ProductionCrisis1 extends Component {
                 crisis: res.data[0].passage,
                 question: res.data[0].question,
                 options: [res.data[0].option1, res.data[0].option2, res.data[0].option3, res.data[0].option4],
-                id : res.dat[0].id
+                id : res.dat[0]._id
             })
             )
     }
