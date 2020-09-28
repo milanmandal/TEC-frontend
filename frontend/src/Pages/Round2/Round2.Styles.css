@@ -106,6 +106,7 @@
     border: none !important;
     padding: 0 !important;
     color: white;
+    margin-top: 60px;
 }
 
 .ReactModal__Content .popup{
@@ -123,7 +124,7 @@
 }
 
 .ReactModal__Content .popup .popup-details .heading-primary{
-    font-size: 44px;
+    font-size: 33px;
     margin: 20px 0;
     color: #2ba15f;
     letter-spacing: 5px;
@@ -131,18 +132,18 @@
 
 .ReactModal__Content .popup .popup-details table{
     margin: 50px 0;
-    font-size: 24px;
+    font-size: 16px;
 }
 
 .ReactModal__Content .popup .popup-details p{
-    font-size: 20px;
+    font-size: 15px;
     margin-bottom: 50px;
 }
 
 .ReactModal__Content .popup .popup-details input{
     width: 80%;
     margin: 0 5%;
-    font-size: 24px;
+    font-size: 16px;
     background: #1c1f24;
     outline: none;
     border: none;
@@ -151,13 +152,13 @@
 }
 
 .ReactModal__Content .popup .popup-details button{
-    height: 40px;
+    height: 30px;
     margin: 20px;
     transition: all 0.5s cubic-bezier(0.445, 0.05, 0, 1);
     border: none;
     outline: none;
     border-radius: 2px;
-    font-size: 20px;
+    font-size: 15px;
     margin-top: 20px;
 }
 
@@ -167,7 +168,7 @@
 }
 
 .ReactModal__Content .popup .popup-contents .heading-secondary{
-    font-size: 36px;
+    font-size: 27px;
     margin: 20px;
     color: #f8d229;
     letter-spacing: 2px;
@@ -176,7 +177,7 @@
 .ReactModal__Content .popup .popup-contents .news{
     width: 85%;
     margin: auto;
-    font-size: 20px;
+    font-size: 15px;
     letter-spacing: 1px;
     padding-bottom: 20px;
 }
@@ -187,13 +188,13 @@
 }
 
 .ReactModal__Content .popup .popup-contents::-webkit-scrollbar{
-    width: 10px;
+    width: 7.5px;
     background-color: transparent;
   }
  
   ::-webkit-scrollbar-thumb{
     background-color: #199854;
-    border-radius: 15px;
+    border-radius: 10px;
   }
 
 .ReactModal__Content .popup .popup-contents .graph canvas{
@@ -209,5 +210,12 @@ h1{
 
 .round2-toast{
     padding: 20px;
-    font-size: 20px;
+    font-size: 15px;
+}
+
+@media (max-width: 541px) {
+  .ReactModal__Content {
+    display: none;
+    visibility: hidden;
+  }
 }

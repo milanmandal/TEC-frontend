@@ -19,13 +19,7 @@ class SalesQuestions extends Component {
                     "authorization": "Bearer " + sessionStorage.usertoken
                 }
             })
-            .then(res => {
-                
-
-                this.setState({ 
-                    salesQuestions: res.data 
-                })
-            })
+            .then(res => this.setState({ salesQuestions: res.data }))
     }
 
     render() {
@@ -37,8 +31,6 @@ class SalesQuestions extends Component {
                             redirect={'/round1/score'}
                             questions={this.state.salesQuestions}
                             questionsName='Sales Questions'
-                            domain = 'sales'
-                            company = {this.props.match.params.companyName}
                             currentPath={this.props.match.url}
                         />
                     </div>

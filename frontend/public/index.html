@@ -26,7 +26,7 @@
   <title>BusinessIdeas2.0</title>
 </head>
 
-<body>
+<body oncontextmenu="return false">
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root"></div>
   <!--
@@ -40,5 +40,29 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
 </body>
+
+<script>
+  document.onkeydown = function (e) {
+    if (e.keyCode == 123) {
+      return false;
+    }
+    if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+      return false
+    }
+    if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+      return false
+    }
+    if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+      return false
+    }
+  }
+
+  if (typeof window.__REACT_DEVTOOLS_GLOBAL_HOOK__ === "object") {
+	for (let [key, value] of Object.entries(window.__REACT_DEVTOOLS_GLOBAL_HOOK__)) {
+		window.__REACT_DEVTOOLS_GLOBAL_HOOK__[key] = typeof value == "function" ? ()=>{} : null;
+	}
+}
+
+</script>
 
 </html>

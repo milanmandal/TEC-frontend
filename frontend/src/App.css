@@ -3,13 +3,13 @@ body{
 }
 
 body::-webkit-scrollbar{
-  width: 10px;
+  width: 7.5px;
   background-color: transparent;
 }
 
 body::-webkit-scrollbar-thumb{
   background-color: #199854;
-  border-radius: 20px;
+  border-radius: 10px;
 }
 
 #root{

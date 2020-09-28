@@ -19,14 +19,7 @@ class FinanceQuestions extends Component {
                     "authorization": "Bearer " + sessionStorage.usertoken
                 }
             })
-            .then(res => 
-                    {
-                        
-                        
-                        this.setState({ 
-                            financeQuestions: res.data
-                        })
-                    })
+            .then(res => this.setState({ financeQuestions: res.data }))
     }
 
     render() {
@@ -39,8 +32,6 @@ class FinanceQuestions extends Component {
                             redirect={'/comprehension/' + this.props.match.params.companyName + '/Resdev'}
                             questions={this.state.financeQuestions}
                             questionsName='Finance Questions'
-                            domain = 'finance'
-                            company = {this.props.match.params.companyName}
                             currentPath={this.props.match.url}
                         />
                     </div>

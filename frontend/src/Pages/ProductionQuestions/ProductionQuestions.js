@@ -23,14 +23,7 @@ class ProductionQuestions extends Component {
                     "authorization": "Bearer " + sessionStorage.usertoken
                 }
             })
-            .then(res => {
-                
-
-                this.setState({ 
-                    productionQuestions: res.data 
-                })
-            })
-            
+            .then(res =>{ console.log(res.data);this.setState({ productionQuestions: res.data })})
     }
 
     render() {
@@ -42,8 +35,6 @@ class ProductionQuestions extends Component {
                             redirect={'/comprehension/' + this.props.match.params.companyName + '/Finance'}
                             questions={this.state.productionQuestions}
                             questionsName='Production Questions'
-                            domain = 'production'
-                            company = {this.props.match.params.companyName}
                             currentPath={this.props.match.url}
                         />
                     </div>

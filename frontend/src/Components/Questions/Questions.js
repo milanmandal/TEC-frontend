@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import Axios from 'axios';
 import url from '../Url/Url';
 
-const Questions = ({ redirect, questions, questionsName, currentUser, currentPath, setCurrentUser, setScore, company,domain }) => {
+const Questions = ({ redirect, questions, questionsName, currentUser, currentPath, setCurrentUser, setScore }) => {
     useEffect(() => {
         const route = {
             path: currentPath,
@@ -25,7 +25,6 @@ const Questions = ({ redirect, questions, questionsName, currentUser, currentPat
         Axios.get(url + 'user/' + currentUser.currentUser._id)
             .then(response => {
                 if (response.status === 200) {
-                    
                     setCurrentUser(response.data)
                     setScore(response.data.score1)
                 }
@@ -38,7 +37,7 @@ const Questions = ({ redirect, questions, questionsName, currentUser, currentPat
     return (
         <div className='questions-page'>
             <Header heading={questionsName} />
-            <ComprehensionQuestions questions={questions} company={company}  domain={domain}/>
+            <ComprehensionQuestions questions={questions} />
             <div className='button'>
                 <Link to={redirect}><button>Next</button></Link>
             </div>
