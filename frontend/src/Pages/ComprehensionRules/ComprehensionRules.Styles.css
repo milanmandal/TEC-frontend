@@ -29,7 +29,7 @@
     height: fit-content;
     padding: 10px 10%;
     margin: 0;
-    font-size: 20px;
+    font-size: 15px;
 }
 
 .comprehension-rules-container .comprehesion-rules a{
@@ -38,14 +38,14 @@
 }
 
 .comprehesion-rules .button button{
-    width: 20%;
-    margin: 20px 40%;
-    height: 40px;
+    width: 15%;
+    margin: 20px 42.5%;
+    height: 30px;
     transition: all 0.5s cubic-bezier(0.445, 0.05, 0, 1);
     border: none;
     outline: none;
     border-radius: 2px;
-    font-size: 20px;
+    font-size: 15px;
     margin-top: 20px;
 }
 

@@ -1,37 +1,58 @@
+import Axios from 'axios';
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import axios from 'axios'
-import ScoreCard from '../../Components/ScoreCard/ScoreCard';
-var control;
-class RoundTwoScore extends Component{
+import { toast } from 'react-toastify';
+import url from '../../Components/Url/Url';
 
-    componentDidMount()
-    {
-        axios.get('http://localhost:5000/admin/control')
-        .then(response => {
+import './RoundTwoScore.Styles.css'
 
-            console.log(response.data);
-            if(response.data[0].round3==='1')
-            {
-                control = 1;
-            }
+class RoundTwoScore extends Component {
+    constructor() {
+        super()
+        this.state = {
+            control: 0
         }
     }
-    render(){
-        if(sessionStorage.usertoken && this.props.currentUser.currentUser){
+
+    componentDidMount() {
+        const route = {
+            path: '/round2/score',
+        }
+        Axios.post(url + 'user/path/' + this.props.currentUser.currentUser._id, route)
+        Axios.get(url + 'admin/control')
+            .then(response => {
+                if (response.data[0].round3 === '1') {
+                    this.setState({ control: 1 });
+                }
+            })
+    }
+
+    nextRound = () => {
+        if (this.state.control === 1) {
+            sessionStorage.setItem('round', 'round3')
+            window.location = '/round3/rules/' + this.props.currentUser.currentUser._id
+        }
+        else {
+            toast.error("Round 3 is yet to start!", { className: 'round2-toast', position: toast.POSITION.TOP_CENTER })
+            Axios.get(url + 'admin/control')
+                .then(response => {
+                    if (response.data[0].round3 === '1') {
+                        this.setState({ control: 1 });
+                    }
+                })
+        }
+    }
+
+    render() {
+        if (sessionStorage.usertoken && this.props.currentUser.currentUser) {
             return (
-                <React.Fragment>
-                    <ScoreCard
-                        redirect={'/round3/rules/'+this.props.currentUser.currentUser._id}
-                        score={this.props.currentUser.score}
-                        round="Round-2"
-                        nextRound="Round-3"
-                        control = {control} />
-                </React.Fragment>
+                <div className='round2_score'>
+                    <button onClick={this.nextRound}>Round 3</button>
+                </div>
             )
         }
-        else{
-            window.location='/';
+        else {
+            window.location = '/';
         }
     }
 }

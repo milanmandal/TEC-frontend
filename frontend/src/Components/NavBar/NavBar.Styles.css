@@ -1,36 +1,83 @@
 .navbar{
     width: 100%;
     height: 60px;
-    background: #f8d229;
     position: fixed;
-    z-index: 5;
+    z-index: 9999;
+    color: white;
+}
+
+.navbar::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0px;
+    background: #333;
+    z-index: -1;
+    transition: 0.5s;
+}
+
+.navbar::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: -3px;
+    background: linear-gradient(90deg, #2ba15f,#f8d229);
+    z-index: -2;
+    transition: 0.5s;
+}
+
+.navbar img{
+    float: left;
+    margin-left: 50px;
+    height: 50px;
+    margin-top: 5px;
+}
+
+.navbar .text{
+    float: left;
+    margin-left: 15px;
+    font-size: 30px;
+    font-family: 'Bebas Neue', cursive;
+    margin-top: 12px;
+    font-weight: 500;
+    color: #2ba15f;
 }
 
 .navbar .timer{
     margin-right: 50px;
     float: right;
-    font-size: 40px;
+    font-size: 30px;
+    margin-top: 10px;
     z-index: 2;
 }
 
 .navbar .logout-btn{
     float: right;
     margin-right: 50px;
-    margin-top: 10px;
-    height: 40px;
-    width: 5%;
-    font-size: large;
+    margin-top: 18px;
+    height: 30px;
+    padding: 0 10px;
+    font-size: 15;
     background-color: transparent;
     outline: none;
     border: none;
     box-shadow: transparent;
     transform: scale(0.95);
     transition: all 0.5s cubic-bezier(0.445, 0.05, 0, 1);
+    color: white;
+    border: 1px solid white;
 }
 
 .navbar .logout-btn:hover{
     transform: scale(1);
-    border: 1px solid black;
+    background: #f8d229;
+    border: none;
+    color: black;
+    cursor: pointer;
 }
 
 .navbar .logout-btn:active{

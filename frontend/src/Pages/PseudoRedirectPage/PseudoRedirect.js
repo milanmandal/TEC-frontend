@@ -2,6 +2,7 @@ import Axios from 'axios';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import url from '../../Components/Url/Url';
 import { setCurrentUser } from '../../Redux/User/UserActions';
 
 class PseudoRedirect extends Component {
@@ -13,7 +14,7 @@ class PseudoRedirect extends Component {
     }
 
     componentDidMount() {
-        Axios.get('http://localhost:5000/user/' + this.props.match.params.id)
+        Axios.get(url + 'user/' + this.props.match.params.id)
             .then(response => {
                 if (response.status === 200) {
                     this.setState({

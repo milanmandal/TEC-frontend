@@ -4,42 +4,48 @@ import Comprehension from '../../Components/Comprehension/Comprehension';
 import './ProductionComprehension.Styles.css'
 import Axios from 'axios';
 import { connect } from 'react-redux';
+import url from '../../Components/Url/Url'
 
 class ProductionComprehension extends Component {
-    constructor(){
+    constructor() {
         super()
-        this.state={
+        this.state = {
             productionComprehension: ''
         }
     }
 
-    componentDidMount(){
-        Axios.get('http://localhost:5000/company/info',
-        {
-          headers:{
-            "authorization":"Bearer "+sessionStorage.usertoken
-          }
-        }
+    componentDidMount() {
+        Axios.get(url + 'company/info',
+            {
+                headers: {
+                    "authorization": "Bearer " + sessionStorage.usertoken
+                }
+            }
         )
-        .then(res => res.data.map( company => company.name === this.props.match.params.companyName ?
-                this.setState({productionComprehension: company.production})
+            .then(res => res.data.map(company => company.name === this.props.match.params.companyName ?
+                this.setState({ productionComprehension: company.production })
                 : console.log()
             ))
-        
+
     }
 
     render() {
-        if(sessionStorage.usertoken && this.props.currentUser.currentUser)
-        {
-        return (
-            this.state.productionComprehension ? 
-            <div className='production-comprehension-page'>
-               <Comprehension comprehensionName='production' comprehension={this.state.productionComprehension} currentPath={this.props.match.url} redirect={this.props.match.url+'Questions'} />
-            </div>
-            : <div className='loading'>Loading...</div>
-        )
+        if (sessionStorage.usertoken && this.props.currentUser.currentUser) {
+            return (
+                this.state.productionComprehension ?
+                    <div className='production-comprehension-page'>
+                        <Comprehension
+                            comprehensionName='production'
+                            comprehension={this.state.productionComprehension}
+                            currentPath={this.props.match.url}
+                            redirect={this.props.match.url + 'Questions'}
+                            company={this.props.match.params.companyName}
+                        />
+                    </div>
+                    : <div className='loading'>Loading...</div>
+            )
         }
-        else{window.location='/';}
+        else { window.location = '/'; }
     }
 }
 

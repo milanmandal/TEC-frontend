@@ -9,9 +9,10 @@ import './IntroductionPage.Styles.css';
 
 import Header from '../../Components/Header/Header';
 import Body from '../../Components/Body/Body';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Axios from 'axios';
+import url from '../../Components/Url/Url'
 
 
 const mapDispatchToProps = dispatch => ({
@@ -35,7 +36,9 @@ class IntroductionPage extends Component {
   }
 
   componentDidMount() {
-    Axios.get('http://localhost:5000/user/' + this.props.match.params.id)
+    sessionStorage.setItem('round', 'round1')
+    console.log(sessionStorage)
+    Axios.get(url + 'user/' + this.props.match.params.id)
       .then(response => {
         if (response.status === 200) {
           this.setState({
@@ -44,7 +47,7 @@ class IntroductionPage extends Component {
           })
 
           this.props.setCurrentUser(response.data)
-          toast.success('You are alloted with the company ' + response.data.company.toUpperCase())
+          toast.success('You are alloted with the company ' + response.data.company.toUpperCase(), { className: 'companyAllotmentPopUp' })
         }
       })
       .catch((error) => {
@@ -52,7 +55,7 @@ class IntroductionPage extends Component {
       })
 
 
-    Axios.get('http://localhost:5000/company/info',
+    Axios.get(url + 'company/info',
       {
         headers: {
           "authorization": "Bearer " + sessionStorage.usertoken
@@ -70,7 +73,6 @@ class IntroductionPage extends Component {
       return (
         this.state.CompanyName ?
           <div className='introduction-page'>
-            <ToastContainer className='alert' />
             <div className='company-introduction'>
               <Header heading={this.state.CompanyName} />
               <Body body={this.state.info} />
@@ -78,7 +80,7 @@ class IntroductionPage extends Component {
                 <Link to={
                   this.state.page ?
                     this.state.page
-                    : '/comprehensionRules/' + this.state.CompanyName
+                    : '/round1set/' + this.props.match.params.id
                 }>
                   <button>Go &#8594;</button>
                 </Link>

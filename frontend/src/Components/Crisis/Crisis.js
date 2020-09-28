@@ -5,6 +5,7 @@ import './Crisis.Styles.css';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { updateScoreCrisis } from '../../Redux/User/UserActions';
+import url from '../Url/Url';
 
 const Crisis = ({ heading, crisis, question, options, redirect, currentUser, updateScoreCrisis, currentPath }) => {
 
@@ -17,7 +18,7 @@ const Crisis = ({ heading, crisis, question, options, redirect, currentUser, upd
         response.push(data)
     }
     useEffect(() => {
-        Axios.get('http://localhost:5000/user/' + currentUser.currentUser._id)
+        Axios.get(url + 'user/' + currentUser.currentUser._id)
             .then(response => {
                 if (response.status === 200) {
                     score = response.data.score3;
@@ -30,7 +31,7 @@ const Crisis = ({ heading, crisis, question, options, redirect, currentUser, upd
         const route = {
             path: currentPath,
         }
-        Axios.post('http://localhost:5000/user/path/' + currentUser.currentUser._id, route)
+        Axios.post(url + 'user/path/' + currentUser.currentUser._id, route)
         window.history.pushState(null, null, '/')
     })
     const onsubmit = (e) => {
@@ -46,7 +47,7 @@ const Crisis = ({ heading, crisis, question, options, redirect, currentUser, upd
 
             }
             var id = currentUser.currentUser._id;
-            Axios.post('http://localhost:5000/user/score3/' + id, points)
+            Axios.post(url + 'user/score3/' + id, points)
         }
     }
 

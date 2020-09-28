@@ -1,7 +1,11 @@
+.round2-page{
+    padding-top: 30px;
+}
+
 .round2-page .page-heading{
     color: white;
     letter-spacing: 10px;
-    font-size: 44px;
+    font-size: 33px;
     width: 90%;
     margin: auto;
     padding-top: 80px;
@@ -17,7 +21,7 @@
 }
 
 .stockmarket .company-cards-container{
-    width: 75%;
+    width: 80%;
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
@@ -26,11 +30,11 @@
 .stockmarket .company-cards-container .company-card{
     width: 25%;
     margin: 30px 1%;
-    height: 300px;
+    height: 225px;
 }
 
 .stockmarket .my-portfolio{
-    width: 20%;
+    width: 15%;
 }
 
 .stockmarket .my-portfolio .heading{
@@ -39,6 +43,7 @@
     border-bottom: none;
     padding: 20px;
     letter-spacing: 5px;
+    font-size: 24px;
 }
 
 .stockmarket .my-portfolio .capital{
@@ -50,6 +55,7 @@
     padding: 20px;
     letter-spacing: 3px;
     color: #f8d229;
+    font-size: 16px;
 }
 
 .stockmarket .my-portfolio .investment-details{
@@ -65,15 +71,20 @@
     letter-spacing: 2px;
 }
 
+.stockmarket a{
+    width: 7.5%;
+    margin: 30px auto;
+}
+
 .stockmarket button{
-    height: 40px;
+    height: 30px;
     transition: all 0.5s cubic-bezier(0.445, 0.05, 0, 1);
     border: none;
     outline: none;
     border-radius: 2px;
-    font-size: 20px;
+    font-size: 15px;
     margin: 20px 0;
-    width: 10%;
+    width: 100%;
     margin: auto;
     margin-bottom: 20px;
 }
@@ -181,7 +192,7 @@
   }
  
   ::-webkit-scrollbar-thumb{
-    background-color: rgba(0,0,0,0.9);
+    background-color: #199854;
     border-radius: 15px;
   }
 
@@ -190,6 +201,7 @@
     margin: auto;
     height: 70% !important;
     margin-top: 10px;
+    margin-bottom: 60px;
 }
 h1{
     margin: 0;

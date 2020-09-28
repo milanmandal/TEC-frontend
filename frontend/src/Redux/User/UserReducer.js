@@ -5,7 +5,7 @@ const INITIAL_STATE = {
 }
 
 const userReducer = (state = INITIAL_STATE, action) => {
-    switch(action.type) {
+    switch (action.type) {
         case 'SET_CURRENT_USER':
             return {
                 ...state,
@@ -14,20 +14,25 @@ const userReducer = (state = INITIAL_STATE, action) => {
         case 'UPDATE_SCORE':
             return {
                 ...state,
-                score: action.payload+1000
+                score: action.payload + 1000
+            }
+        case 'SET_SCORE':
+            return {
+                ...state,
+                score: action.payload
             }
         case 'UPDATE_SCORE_CRISIS':
-            return{
+            return {
                 ...state,
                 score: action.payload.currentScore + parseInt(action.payload.addScore)
             }
         case 'UPDATE_INVESTED_COMPANIES':
-            return{
+            return {
                 ...state,
                 investedCompanies: action.payload
             }
         case 'UPDATE_INVESTMENT_SCORE':
-            return{
+            return {
                 ...state,
                 score: action.payload
             }
