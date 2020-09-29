@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Modal from 'react-modal';
-//import "bootstrap/dist/css/bootstrap.min.css";
 
 import './App.css';
 
@@ -34,6 +33,10 @@ import StockMarket from './Pages/Round2/Round2';
 import ScoreSheet from './Pages/ScoreSheet/ScoreSheet';
 import NavBar from './Components/NavBar/NavBar';
 import PseudoRedirect from './Pages/PseudoRedirectPage/PseudoRedirect';
+import PseudoRoundSet from './Pages/PseudoRoundSetPage/PseudoRoundSet';
+import AfterIntro from './Pages/PseudoRoundOneTimeSet/PseudoRoundOneTimeSet';
+import Redirect1 from './Pages/PseudoRoundOneTimeSet/Redirect1';
+import RoundTwoScore from './Pages/Round2Score/RoundTwoScore';
 
 Modal.setAppElement('#root')
 
@@ -61,8 +64,11 @@ class App extends Component {
           <Provider store={store}>
             <Switch>
               <Route exact path='/' component={HomePage} />
+              <Route exact path='/setRound/:id' component={PseudoRoundSet} />
               <Route exact path='/redirect/:id' component={PseudoRedirect} />
               <Route exact path='/intro/:id' component={IntroductionPage} />
+              <Route exact path='/round1set/:id' component={AfterIntro} />
+              <Route exact path='/redirect1/:id' component={Redirect1} />
               <Route exact path='/comprehensionRules/:companyName' component={ComprehensionRules} />
               <Route exact path='/comprehension/:companyName/Production' component={ProductionComprehension} />
               <Route exact path='/comprehension/:companyName/ProductionQuestions' component={ProductionQuestions} />
@@ -75,6 +81,7 @@ class App extends Component {
               <Route exact path='/round1/score' component={RoundOneScore} />
               <Route exact path='/round2/rules/:id' component={Round2Rules} />
               <Route exact path='/stockmarket' component={StockMarket} />
+              <Route exact path='/round2/score' component={RoundTwoScore} />
               <Route exact path='/crisis/production/1' component={ProductionCrisis1} />
               <Route exact path='/crisis/production/2' component={ProductionCrisis2} />
               <Route exact path='/crisis/finance/1' component={FinanceCrisis1} />
@@ -90,7 +97,7 @@ class App extends Component {
           </Provider>
         </div>
         <div className='smaller-display'>
-          <h1>Use a bigger display</h1>
+          <h1>Login from a desktop/laptop</h1>
         </div>
       </div>
     );

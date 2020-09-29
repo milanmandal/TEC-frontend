@@ -3,7 +3,40 @@
     height: fit-content;
     padding: 10px 0;
     margin: 0 5%;
-    font-size: 24px;
+    font-size: 18px;
     letter-spacing: 2px;
     color: white;
 }
+
+.body .img-container{
+    flex-direction: row;
+}
+
+.body .img{
+    margin: 30px;
+    position: relative;
+}
+
+.body #img1{
+    float: left;
+    width: 450px;
+    margin-right: 20px;
+}
+
+.body #img2{
+    float: right;
+    width: 450px;
+    margin-left: 20px;
+}
+
+/* .body .img::before{
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    background: linear-gradient(180deg, #2ba15f,#f8d229);
+    z-index: -2;
+    transition: 0.5s;
+} */

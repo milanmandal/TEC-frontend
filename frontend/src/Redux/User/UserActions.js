@@ -3,6 +3,11 @@ export const setCurrentUser = user => ({
     payload: user
 });
 
+export const setScore = score => ({
+    type: 'SET_SCORE',
+    payload: score
+})
+
 export const updateScore = score => ({
     type: 'UPDATE_SCORE',
     payload: score

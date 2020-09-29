@@ -5,11 +5,12 @@ import Header from '../../Components/Header/Header';
 import { setCurrentUser } from '../../Redux/User/UserActions';
 import { connect } from 'react-redux';
 import Axios from 'axios';
+import url from '../../Components/Url/Url'
 
 class Round3Rules extends Component {
 
     componentDidMount() {
-        Axios.get('http://localhost:5000/user/' + this.props.match.params.id,
+        Axios.get(url + 'user/' + this.props.match.params.id,
             {
                 headers: {
                     "authorization": "Bearer " + sessionStorage.usertoken
@@ -21,7 +22,7 @@ class Round3Rules extends Component {
                     const route = {
                         path: this.props.match.url,
                     }
-                    Axios.post('http://localhost:5000/user/path/' + response.data._id, route)
+                    Axios.post(url + 'user/path/' + response.data._id, route)
                 }
             })
             .catch((error) => {
@@ -48,15 +49,15 @@ class Round3Rules extends Component {
                                         <li>Research and Development</li>
                                     </ul>
                                 </li>
-                                <li>1 Questions will be asked on each domain/vertical and answering them is acompulsion. Thus making a total of 4 questions for this round.</li>
-                                <li>4 choices will be their for each question. However all 4 would be correct ranging from good to best answer.</li>
+                                <li>Two Questions will be asked on each domain/vertical and answering them is acompulsion. Thus making a total of eight questions for this round.</li>
+                                <li>Four choices will be their for each question. However all 4 would be correct ranging from good to best answer.</li>
                                 <li>
                                     Capital investment(rupees)/(points) will be given as follows:
                                     <ul>
-                                        <li>Best answer- <strong>4000 Rs</strong></li>
-                                        <li>2nd Best answer- <strong>3000 Rs</strong></li>
-                                        <li>3rd Best answer- <strong>2000 Rs</strong></li>
-                                        <li>4th Best answer- <strong>1000 Rs</strong></li>
+                                        <li>Best answer- <strong>&#8377; 10000</strong></li>
+                                        <li>2nd Best answer- <strong>&#8377; 6000</strong></li>
+                                        <li>3rd Best answer- <strong>&#8377; 4000</strong></li>
+                                        <li>4th Best answer- <strong>&#8377; 0</strong></li>
                                     </ul>
                                 </li>
                                 <li><strong>No eliminations</strong> for this round.</li>

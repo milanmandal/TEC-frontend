@@ -1,7 +1,7 @@
-import React, { Component,useEffect } from 'react'
+import React, { Component } from 'react'
 import CompanyCard from '../../Components/CompanyCard/CompanyCard'
 import Modal from 'react-modal';
-
+import url from '../../Components/Url/Url'
 
 import './Round2.Styles.css'
 import Axios from 'axios';
@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import { updateInvestedCompanies, updateInvestmentScore } from '../../Redux/User/UserActions';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
+import { Link } from 'react-router-dom';
 toast.configure()
 
 class StockMarket extends Component {
@@ -22,38 +23,66 @@ class StockMarket extends Component {
             isPopUpOpen: false,
             investedAmount: 0,
             investedCompanies: [],
-            control:0,
+            news: []
         }
     }
 
     componentDidMount() {
-        Axios.get('http://localhost:5000/stock/companylist',
-            {
-                headers: {
-                    "authorization": "Bearer " + sessionStorage.usertoken
-                }
-            })
-            .then(res => this.setState({ companies: res.data }))
+        if (this.props.currentUser.currentUser) {
 
-        this.setState({ capital: this.props.currentUser.currentUser.score1 })
-
-        const route = {
-            path: this.props.match.url,
-        }
-        Axios.post('http://localhost:5000/user/path/' + this.props.currentUser.currentUser._id, route)
-
-        Axios.get('http://localhost:5000/admin/control')
-            .then(response => {
-
-                console.log(response.data)
-
-                this.setState({control:response.data[0].round1});
-                console.log(this.state.control)
-                if(response.data[0].round3==='1')
+            const { company1, company2, invest1, invest2, score1 } = this.props.currentUser.currentUser
+            const { investedCompanies } = this.state
+            Axios.get(url + 'stock/companylist',
                 {
-                    this.setState({control:1});
-                }
-            })
+                    headers: {
+                        "authorization": "Bearer " + sessionStorage.usertoken
+                    }
+                })
+                .then(res => {
+                    res.data.map((company) => {
+                        if (company.name === company1) {
+                            investedCompanies.push({
+                                name: company.name,
+                                investedAmount: invest1,
+                                returns: (company.profitpercent + 100) * invest1 / 100,
+                                data: company.data
+                            })
+                        }
+                        if (company.name === company2) {
+                            investedCompanies.push({
+                                name: company.name,
+                                investedAmount: invest2,
+                                returns: (company.profitpercent + 100) * invest2 / 100,
+                                data: company.data
+                            })
+                        }
+                    })
+                })
+
+            Axios.get(url + 'stock/companylist',
+                {
+                    headers: {
+                        "authorization": "Bearer " + sessionStorage.usertoken
+                    }
+                })
+                .then(res => this.setState({ companies: res.data }))
+
+            this.setState({ capital: score1 - invest1 - invest2 })
+
+            const route = {
+                path: this.props.match.url,
+            }
+            Axios.post(url + 'user/path/' + this.props.currentUser.currentUser._id, route)
+
+            window.history.pushState(null, null, '/')
+
+            Axios.get(url + 'admin/control')
+                .then(response => {
+                    if (response.data[0].round3 === '1') {
+                        this.setState({ control: 1 });
+                    }
+                })
+        } else { window.location = '/' }
     }
 
     onclick = (e) => {
@@ -62,6 +91,20 @@ class StockMarket extends Component {
             selectedCompany: this.state.companies[e.currentTarget.id],
             isPopUpOpen: true
         })
+        const { newsone, newstwo, newsthree } = this.state.companies[e.currentTarget.id]
+        const firstNews = {
+            headline: newsone.split('#')[0],
+            news: newsone.split('#')[1]
+        }
+        const secondNews = {
+            headline: newstwo.split('#')[0],
+            news: newstwo.split('#')[1]
+        }
+        const thirdNews = {
+            headline: newsthree.split('#')[0],
+            news: newsthree.split('#')[1]
+        }
+        this.state.news.push(firstNews, secondNews, thirdNews)
     }
 
     onInvestAmtChanged = (e) => {
@@ -85,8 +128,7 @@ class StockMarket extends Component {
                     this.setState({ capital: capital - investedAmount })
                     const existingCompany = investedCompanies.find((company) => company.name === selectedCompany.name)
                     if (existingCompany) {
-                        existingCompany.investedAmount = existingCompany.investedAmount + investedAmount
-                        existingCompany.returns = (selectedCompany.profitpercent + 100) * existingCompany.investedAmount / 100
+                        toast.error("You have already invested in this company, canNOT invest again", { className: 'round2-toast', position: toast.POSITION.TOP_CENTER })
                     } else {
                         investedCompanies.push({
                             name: selectedCompany.name,
@@ -94,6 +136,7 @@ class StockMarket extends Component {
                             returns: (selectedCompany.profitpercent + 100) * investedAmount / 100,
                             data: selectedCompany.data
                         })
+
                     }
                     this.props.updateInvestmentScore(this.score())
                     this.props.updateInvestedCompanies(investedCompanies)
@@ -104,12 +147,11 @@ class StockMarket extends Component {
                         invest1: investedCompanies[0] ? investedCompanies[0].investedAmount : 0,
                         invest2: investedCompanies[1] ? investedCompanies[1].investedAmount : 0
                     }
-                    console.log(points)
                     var id = this.props.currentUser.currentUser._id;
-                    Axios.post('http://localhost:5000/user/company1/' + id, points)
-                    Axios.post('http://localhost:5000/user/company2/' + id, points)
-                    Axios.post('http://localhost:5000/user/invest1/' + id, points)
-                    Axios.post('http://localhost:5000/user/invest2/' + id, points)
+                    Axios.post(url + 'user/company1/' + id, points)
+                    Axios.post(url + 'user/company2/' + id, points)
+                    Axios.post(url + 'user/invest1/' + id, points)
+                    Axios.post(url + 'user/invest2/' + id, points)
                 } else {
                     toast.error("Cannot invest in more than 2 stocks", { className: 'round2-toast', position: toast.POSITION.TOP_CENTER })
                 }
@@ -127,18 +169,9 @@ class StockMarket extends Component {
         return (parseFloat(returns) + parseFloat(this.state.capital.toFixed(2)) - parseFloat(this.state.investedAmount.toFixed(2)))
     }
 
-    nextRound=()=> {
-        if(this.state.control ===1)
-        {
-            window.location = '/round3/rules/' + this.props.currentUser.currentUser._id
-        }
-        else{
-            window.alert("NEXT ROUND IS YET TO START")
-        }
-    }
-
     render() {
         if (sessionStorage.usertoken && this.props.currentUser) {
+            console.log(this.state)
             return (
                 this.state.companies ?
                     <div className='round2-page'>
@@ -151,16 +184,16 @@ class StockMarket extends Component {
                             </div>
                             <div className='my-portfolio'>
                                 <h1 className='heading'>My Portfolio</h1>
-                                <h3 className='capital'>Capital: {this.state.capital.toFixed(2)}</h3>
+                                <h3 className='capital'>Capital Left: {this.state.capital.toFixed(2)}</h3>
                                 <div className='investment-details'>
                                     {
                                         this.state.investedCompanies.map((investedCompany, index) =>
-                                            <p key={index}>You have invested <strong>Rs. {investedCompany.investedAmount.toFixed(2)}</strong> in <strong>{investedCompany.name}</strong></p>
+                                            <p key={index}>You have invested <strong>&#8377; {investedCompany.investedAmount.toFixed(2)}</strong> in <strong>{investedCompany.name}</strong></p>
                                         )
                                     }
                                 </div>
                             </div>
-                            <button onClick={this.nextRound}>Round 3</button>
+                            <Link to='/round2/score'><button>Next</button></Link>
                             <Modal isOpen={this.state.isPopUpOpen} onRequestClose={() => this.setState({ isPopUpOpen: false })}>
                                 {
                                     this.state.selectedCompany ?
@@ -171,7 +204,7 @@ class StockMarket extends Component {
                                                     <tbody>
                                                         <tr>
                                                             <td>Price:</td>
-                                                            <td>Rs. {this.state.selectedCompany.data[this.state.selectedCompany.data.length - 1].price}</td>
+                                                            <td>&#8377; {this.state.selectedCompany.data[this.state.selectedCompany.data.length - 1].price}</td>
                                                         </tr>
                                                         <tr>
                                                             <td>Last Updated:</td>
@@ -193,9 +226,14 @@ class StockMarket extends Component {
                                                 <h1 className='heading-secondary'>Graph</h1>
                                                 <Graph stockData={this.state.selectedCompany.data.slice(0, 8)} />
                                                 <h1 className='heading-secondary'>News</h1>
-                                                <p className='news'>{this.state.selectedCompany.newsone}</p>
-                                                <p className='news'>{this.state.selectedCompany.newstwo}</p>
-                                                <p className='news'>{this.state.selectedCompany.newsthree}</p>
+                                                {
+                                                    this.state.news.map((news, index) =>
+                                                        <div key={index} className='news'>
+                                                            <strong>{news.headline}</strong>
+                                                            <p>{news.news}</p>
+                                                        </div>
+                                                    )
+                                                }
                                             </div>
                                         </div>
                                         : <div className='loading'>Loading...</div>

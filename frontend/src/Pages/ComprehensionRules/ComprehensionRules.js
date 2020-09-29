@@ -6,6 +6,7 @@ import './ComprehensionRules.Styles.css';
 import Header from '../../Components/Header/Header';
 import Axios from 'axios';
 import { connect } from 'react-redux';
+import url from '../../Components/Url/Url';
 
 const ComprehensionRules = ({ match, currentUser }) => {
 
@@ -15,7 +16,7 @@ const ComprehensionRules = ({ match, currentUser }) => {
         const route = {
             path: '/comprehensionRules/' + allotedCompanyName,
         }
-        Axios.post('http://localhost:5000/user/path/' + currentUser.currentUser._id, route)
+        Axios.post(url + 'user/path/' + currentUser.currentUser._id, route)
     })
 
 

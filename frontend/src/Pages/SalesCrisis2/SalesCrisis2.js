@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Crisis from '../../Components/Crisis/Crisis'
 import Axios from 'axios'
 import { connect } from 'react-redux'
+import url from '../../Components/Url/Url'
 
 class SalesCrisis2 extends Component {
     constructor() {
@@ -14,7 +15,7 @@ class SalesCrisis2 extends Component {
     }
 
     componentDidMount() {
-        Axios.get('http://localhost:5000/' + this.props.currentUser.currentUser.company + '/getcrisissales',
+        Axios.get(url + this.props.currentUser.currentUser.company + '/getcrisissales',
             {
                 headers: {
                     "authorization": "Bearer " + sessionStorage.usertoken

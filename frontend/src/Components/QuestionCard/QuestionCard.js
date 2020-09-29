@@ -2,10 +2,11 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import './QuestionCard.Styles.css';
-import { updateScore } from '../../Redux/User/UserActions';
+import { setScore, updateScore } from '../../Redux/User/UserActions';
 import Axios from 'axios';
+import url from '../Url/Url';
 
-const QuestionCard = ({ questionDetails, index, currentUser, updateScore, questions }) => {
+const QuestionCard = ({ questionDetails, index, currentUser, updateScore, questions, setScore }) => {
     useEffect(() => {
         if (eval('currentUser.currentUser.q' + (index + 1)) === 1) {
             var div = document.getElementById(questions[index]._id)
@@ -39,15 +40,17 @@ const QuestionCard = ({ questionDetails, index, currentUser, updateScore, questi
             const question = {
                 flag: 1  //answered
             }
-            Axios.post('http://localhost:5000/user/question/' + parseInt(index + 1) + '/' + currentUser.currentUser._id, question)
+            Axios.post(url + 'user/question/' + parseInt(index + 1) + '/' + currentUser.currentUser._id, question)
             if (result[result.length - 1] === true) {
                 updateScore(currentUser.score)
-
-                const points = {
-                    score1: currentUser.currentUser.score1 + currentUser.score + 1000,
-                }
+                const points = currentUser.score === 0 ?
+                    {
+                        score1: currentUser.currentUser.score1 + 1000
+                    } : {
+                        score1: currentUser.score + 1000
+                    }
                 var id = currentUser.currentUser._id;
-                Axios.post('http://localhost:5000/user/score1/' + id, points)
+                Axios.post(url + 'user/score1/' + id, points)
             }
             var div = document.getElementById(respons.name)
             var form = document.getElementById(respons.name + 'form')
@@ -55,6 +58,11 @@ const QuestionCard = ({ questionDetails, index, currentUser, updateScore, questi
             div.classList.remove('hover')
             for (var i = 0; i < elements.length; i++) {
                 elements[i].disabled = true
+                if (elements[i].value === respons.value) {
+                    elements[i].style.opacity = 0.2
+                } else {
+                    elements[i].style.opacity = 0.7
+                }
             }
         }
     }
@@ -66,7 +74,10 @@ const QuestionCard = ({ questionDetails, index, currentUser, updateScore, questi
                     <h3>{question}</h3>
                     <form id={_id + 'form'} onSubmit={onSubmitMcqs}>
                         {
-                            options.map((option, index) => <div className='options' key={index + 1}><input type='radio' name={_id} value={String.fromCharCode(97 + index)} /><label>{option.toUpperCase()}</label></div>)
+                            options.map((option, index) =>
+                                <div className='options' key={index + 1}>
+                                    <label htmlFor={_id + index}><input type='radio' id={_id + index} name={_id} value={String.fromCharCode(97 + index)} />{option.toUpperCase()}</label>
+                                </div>)
                         }
                         <button type='submit' id='submit-btn'>Submit</button>
                     </form>
@@ -81,7 +92,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    updateScore: score => dispatch(updateScore(score))
+    updateScore: score => dispatch(updateScore(score)),
+    setScore: score => dispatch(setScore(score))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestionCard);

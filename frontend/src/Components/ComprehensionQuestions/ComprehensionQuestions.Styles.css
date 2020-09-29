@@ -9,22 +9,30 @@
 }
 
 .mcq-questions{
-    padding: 20px;
+    padding: 15px;
     position: relative;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
-    grid-gap: 40px 40px;
+    grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+    grid-gap: 40px 20px;
     grid-template-rows: auto;
 }
 
 .mcq-questions .mcq-container{
+    max-width: 300px;
     position: relative;
-    height: 500px;
+    height: 375px;
     display: flex;
     justify-content: center;
     align-items: center;
     background: #282c34;
     border: 1px solid #242830;
+}
+
+.mcq-questions .mcq-container input[type=radio]{
+    width: 8px;
+    vertical-align: middle;
+    position: relative;
+    bottom: 3px;
 }
 
 .mcq-questions .hover:before{

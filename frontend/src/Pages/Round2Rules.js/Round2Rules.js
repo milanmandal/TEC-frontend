@@ -5,11 +5,12 @@ import Header from '../../Components/Header/Header';
 import { setCurrentUser } from '../../Redux/User/UserActions';
 import { connect } from 'react-redux';
 import Axios from 'axios';
+import url from '../../Components/Url/Url'
 
 class Round2Rules extends Component {
 
     componentDidMount() {
-        Axios.get('http://localhost:5000/user/' + this.props.match.params.id,
+        Axios.get(url + 'user/' + this.props.match.params.id,
             {
                 headers: {
                     "authorization": "Bearer " + sessionStorage.usertoken
@@ -21,7 +22,7 @@ class Round2Rules extends Component {
                     const route = {
                         path: this.props.match.url,
                     }
-                    Axios.post('http://localhost:5000/user/path/' + response.data._id, route)
+                    Axios.post(url + 'user/path/' + response.data._id, route)
                 }
             })
             .catch((error) => {

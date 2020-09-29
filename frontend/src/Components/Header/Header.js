@@ -3,9 +3,13 @@ import React from 'react';
 import './Header.Styles.css';
 
 const Header = ({ heading }) => {
-    return(
+    return (
         <div className='header'>
-            <h1 className='title'>{heading.toUpperCase()}</h1>
+            {
+                heading.toUpperCase() === 'LNT' ?
+                    <h1 className='title'>L&T</h1> :
+                    <h1 className='title'>{heading.toUpperCase()}</h1>
+            }
         </div>
     )
 }

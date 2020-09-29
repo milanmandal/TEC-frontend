@@ -1,7 +1,11 @@
+.round2-page{
+    padding-top: 30px;
+}
+
 .round2-page .page-heading{
     color: white;
     letter-spacing: 10px;
-    font-size: 44px;
+    font-size: 33px;
     width: 90%;
     margin: auto;
     padding-top: 80px;
@@ -17,7 +21,7 @@
 }
 
 .stockmarket .company-cards-container{
-    width: 75%;
+    width: 80%;
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
@@ -26,11 +30,11 @@
 .stockmarket .company-cards-container .company-card{
     width: 25%;
     margin: 30px 1%;
-    height: 300px;
+    height: 225px;
 }
 
 .stockmarket .my-portfolio{
-    width: 20%;
+    width: 15%;
 }
 
 .stockmarket .my-portfolio .heading{
@@ -39,6 +43,7 @@
     border-bottom: none;
     padding: 20px;
     letter-spacing: 5px;
+    font-size: 24px;
 }
 
 .stockmarket .my-portfolio .capital{
@@ -50,6 +55,7 @@
     padding: 20px;
     letter-spacing: 3px;
     color: #f8d229;
+    font-size: 16px;
 }
 
 .stockmarket .my-portfolio .investment-details{
@@ -65,15 +71,20 @@
     letter-spacing: 2px;
 }
 
+.stockmarket a{
+    width: 7.5%;
+    margin: 30px auto;
+}
+
 .stockmarket button{
-    height: 40px;
+    height: 30px;
     transition: all 0.5s cubic-bezier(0.445, 0.05, 0, 1);
     border: none;
     outline: none;
     border-radius: 2px;
-    font-size: 20px;
+    font-size: 15px;
     margin: 20px 0;
-    width: 10%;
+    width: 100%;
     margin: auto;
     margin-bottom: 20px;
 }
@@ -95,6 +106,7 @@
     border: none !important;
     padding: 0 !important;
     color: white;
+    margin-top: 60px;
 }
 
 .ReactModal__Content .popup{
@@ -112,7 +124,7 @@
 }
 
 .ReactModal__Content .popup .popup-details .heading-primary{
-    font-size: 44px;
+    font-size: 33px;
     margin: 20px 0;
     color: #2ba15f;
     letter-spacing: 5px;
@@ -120,18 +132,18 @@
 
 .ReactModal__Content .popup .popup-details table{
     margin: 50px 0;
-    font-size: 24px;
+    font-size: 16px;
 }
 
 .ReactModal__Content .popup .popup-details p{
-    font-size: 20px;
+    font-size: 15px;
     margin-bottom: 50px;
 }
 
 .ReactModal__Content .popup .popup-details input{
     width: 80%;
     margin: 0 5%;
-    font-size: 24px;
+    font-size: 16px;
     background: #1c1f24;
     outline: none;
     border: none;
@@ -140,13 +152,13 @@
 }
 
 .ReactModal__Content .popup .popup-details button{
-    height: 40px;
+    height: 30px;
     margin: 20px;
     transition: all 0.5s cubic-bezier(0.445, 0.05, 0, 1);
     border: none;
     outline: none;
     border-radius: 2px;
-    font-size: 20px;
+    font-size: 15px;
     margin-top: 20px;
 }
 
@@ -156,7 +168,7 @@
 }
 
 .ReactModal__Content .popup .popup-contents .heading-secondary{
-    font-size: 36px;
+    font-size: 27px;
     margin: 20px;
     color: #f8d229;
     letter-spacing: 2px;
@@ -165,7 +177,7 @@
 .ReactModal__Content .popup .popup-contents .news{
     width: 85%;
     margin: auto;
-    font-size: 20px;
+    font-size: 15px;
     letter-spacing: 1px;
     padding-bottom: 20px;
 }
@@ -176,13 +188,13 @@
 }
 
 .ReactModal__Content .popup .popup-contents::-webkit-scrollbar{
-    width: 10px;
+    width: 7.5px;
     background-color: transparent;
   }
  
   ::-webkit-scrollbar-thumb{
-    background-color: rgba(0,0,0,0.9);
-    border-radius: 15px;
+    background-color: #199854;
+    border-radius: 10px;
   }
 
 .ReactModal__Content .popup .popup-contents .graph canvas{
@@ -190,6 +202,7 @@
     margin: auto;
     height: 70% !important;
     margin-top: 10px;
+    margin-bottom: 60px;
 }
 h1{
     margin: 0;
@@ -197,5 +210,12 @@ h1{
 
 .round2-toast{
     padding: 20px;
-    font-size: 20px;
+    font-size: 15px;
+}
+
+@media (max-width: 541px) {
+  .ReactModal__Content {
+    display: none;
+    visibility: hidden;
+  }
 }
