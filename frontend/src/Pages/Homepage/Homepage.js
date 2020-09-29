@@ -71,7 +71,7 @@ export default class HomePage extends Component {
                                         company: res.data.company,
                                         index: res.data._id,
                                         token: res.data.token,
-                                        path: res.data.page
+                                        path: res.data.page,
                                     })
                                     Axios.get(url + 'admin/gettimer')
                                         .then(res => sessionStorage.setItem('round', res.data[0].round))
